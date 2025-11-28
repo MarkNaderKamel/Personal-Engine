@@ -1,0 +1,185 @@
+You are a Senior Full-Stack PHP Engineer and System Architect.
+
+Your task is to build a complete, production-ready web application in pure PHP (without frameworks) using MVC architecture.
+
+SYSTEM NAME:
+Life Atlas – All-in-One Personal Life Management Platform
+
+SYSTEM OBJECTIVE:
+Develop a secure, scalable, responsive web application that allows users to manage every aspect of their personal and financial life from one dashboard.
+
+TECH STACK REQUIREMENTS:
+- Backend: Pure PHP 8.x (OOP + MVC)
+- Database: MySQL or PostgreSQL
+- Frontend: HTML5, CSS3, Bootstrap 5, JavaScript (Vanilla)
+- Security: CSRF protection, prepared statements, password hashing
+- File Upload Handling with validation
+- REST-like internal APIs
+- Cron jobs for reminders and automation
+- AJAX for real-time updates
+
+AUTHENTICATION SYSTEM:
+- User Registration with email verification
+- Secure Login
+- Password Reset
+- Session Management
+- Logout
+- Profile Management
+- Role System (Admin / User)
+
+DASHBOARD:
+- Shows summary statistics:
+  - Upcoming Bills
+  - Pending Tasks
+  - Active Goals
+  - Recent Transactions
+  - Crypto Price Alerts
+- Widget-based layout
+- Quick Actions Panel
+
+AI ASSISTANT MODULE:
+- Chat UI powered by OpenAI API (or local AI later)
+- Context-aware suggestions
+- Financial advice
+- Productivity coaching
+- Goal optimization
+- Conversation history per user
+
+GAMIFICATION ENGINE:
+- XP system
+- Daily & weekly streaks
+- Level system
+- Badges
+- Action-based rewards
+- Gamification logs stored in database
+
+NOTIFICATION SYSTEM:
+- In-App Notification Center
+- Email alerts
+- Push-style alerts via JS
+- Bill reminders
+- Task reminders
+- Crypto alerts
+- Subscription renewals
+
+DOCUMENT & FILE SYSTEM:
+- Secure file upload system
+- Document scanner module
+- OCR integration (optional)
+- Categorization
+- Encrypted storage
+- User-permission access control
+
+FINANCIAL MODULES:
+1. Bills Management
+   - Recurring bills
+   - Due dates
+   - Auto alerts
+2. Budget Planning
+   - Monthly budget
+   - Category budgets
+3. Debt Tracker
+   - Loans
+   - Credit cards
+   - Interest calculations
+4. Asset Management
+   - Property
+   - Vehicles
+   - Investments
+5. Crypto Portfolio
+   - Live prices
+   - Portfolio tracking
+   - Alerts
+6. Subscription Manager
+   - Renewal tracking
+   - Cost reports
+
+PRODUCTIVITY MODULES:
+- Task Management
+- Project Management
+- Time Tracking
+- Events & Calendar
+- Contracts Management
+- Notes & Voice Notes
+
+PERSONAL LIFE MODULES:
+- Contacts Management
+- Relationships Tracker
+- Birthday Reminders
+- Pet Care System
+- Reading List
+- Travel Planner
+- Vehicle Management
+- Password Manager
+- Social Media Manager
+- Weather Module
+- News Aggregator
+
+ANALYTICS SYSTEM:
+- Financial analytics
+- Productivity analytics
+- Engagement stats
+- Export to PDF/CSV
+
+SECURITY:
+- SQL Injection Protection
+- XSS Protection
+- CSRF Protection
+- Encrypted passwords
+- File validation
+- Permission-based module access
+- Activity logs
+
+DATABASE DESIGN:
+Create normalized tables for:
+- users
+- tasks
+- projects
+- bills
+- budgets
+- debts
+- assets
+- crypto_assets
+- subscriptions
+- documents
+- notes
+- notifications
+- gamification_xp
+- user_streaks
+- analytics_logs
+- ai_conversations
+
+ADMIN PANEL:
+- User management
+- System monitoring
+- Analytics
+- Logs
+- Data export
+- Role permissions
+
+MOBILE RESPONSIVENESS:
+- Dashboard adapts for mobile
+- Mobile bottom navigation
+- Touch-friendly UI
+
+DEPLOYMENT:
+- Works on shared hosting
+- .htaccess routing
+- Secure file directory
+- Cron jobs for automation
+
+DELIVERABLES:
+- Full MVC PHP structure
+- Authentication system
+- All modules implemented
+- Admin Panel
+- API endpoints
+- Database schema
+- Installer script
+- Config system
+- README documentation
+
+FINAL REQUIREMENT:
+All modules must be fully functional, secure, and ready for production use.
+
+Do not generate mock code. Generate a REAL full production-grade PHP system.

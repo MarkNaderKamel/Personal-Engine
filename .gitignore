@@ -1,0 +1,11 @@
+uploads/documents/*
+!uploads/documents/.gitkeep
+uploads/profiles/*
+!uploads/profiles/.gitkeep
+logs/*
+!logs/.gitkeep
+.env
+vendor/
+composer.lock
+*.log
+.DS_Store

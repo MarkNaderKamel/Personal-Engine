@@ -1,0 +1,50 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1rem;
+}
+
+.table {
+    background-color: white;
+}
+
+.btn {
+    border-radius: 0.25rem;
+}
+
+#chatContainer {
+    background-color: #f8f9fa;
+}
+
+.list-group-item-primary {
+    border-left: 4px solid #0d6efd;
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .table {
+        font-size: 0.875rem;
+    }
+}
+
+.alert {
+    border-radius: 0.25rem;
+}
+
+.badge {
+    padding: 0.35em 0.65em;
+}

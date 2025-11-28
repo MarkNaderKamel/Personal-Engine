@@ -1,0 +1,65 @@
+<?php 
+$pageTitle = 'Subscriptions'; 
+include __DIR__ . '/../../layouts/header.php'; 
+use App\Core\Security;
+?>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Subscription Management</h2>
+        <a href="/subscriptions/create" class="btn btn-primary">Add Subscription</a>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5>Monthly Total</h5>
+                    <h3>$<?= number_format($monthlyTotal, 2) ?></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php if (count($subscriptions) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Cost</th>
+                    <th>Billing Cycle</th>
+                    <th>Next Billing</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($subscriptions as $sub): ?>
+                <tr>
+                    <td><?= Security::sanitizeOutput($sub['service_name']) ?></td>
+                    <td>$<?= number_format($sub['cost'], 2) ?></td>
+                    <td><?= Security::sanitizeOutput($sub['billing_cycle']) ?></td>
+                    <td><?= date('M d, Y', strtotime($sub['next_billing_date'])) ?></td>
+                    <td>
+                        <span class="badge bg-<?= $sub['status'] == 'active' ? 'success' : 'secondary' ?>">
+                            <?= $sub['status'] ?>
+                        </span>
+                    </td>
+                    <td>
+                        <form method="POST" action="/subscriptions/delete/<?= $sub['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                            <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php else: ?>
+    <div class="alert alert-info">No subscriptions found. <a href="/subscriptions/create">Add your first subscription</a></div>
+    <?php endif; ?>
+</div>
+
+<?php include __DIR__ . '/../../layouts/footer.php'; ?>
