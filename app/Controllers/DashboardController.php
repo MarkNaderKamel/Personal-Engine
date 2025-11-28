@@ -36,16 +36,16 @@ class DashboardController
         $userId = $_SESSION['user_id'];
         
         $data = [
-            'upcomingBills' => $this->billModel->getUpcomingBills($userId, 7),
-            'overdueBills' => $this->billModel->getOverdueBills($userId),
-            'pendingTasks' => $this->taskModel->getPendingTasks($userId),
-            'taskStats' => $this->taskModel->getTaskStats($userId),
+            'upcomingBills' => $this->billModel->getUpcomingBills($userId, 7) ?: [],
+            'overdueBills' => $this->billModel->getOverdueBills($userId) ?: [],
+            'pendingTasks' => $this->taskModel->getPendingTasks($userId) ?: [],
+            'taskStats' => $this->taskModel->getTaskStats($userId) ?: ['pending' => 0, 'completed' => 0],
             'userStats' => $this->gamification->getUserStats($userId),
-            'recentXP' => $this->gamification->getRecentTransactions($userId, 5),
-            'unreadNotifications' => $this->notificationModel->getUnreadNotifications($userId),
-            'currentBudgets' => $this->budgetModel->getCurrentMonthBudgets($userId),
-            'activeSubscriptions' => $this->subscriptionModel->getActiveSubscriptions($userId),
-            'monthlySubscriptionTotal' => $this->subscriptionModel->getMonthlyTotal($userId)
+            'recentXP' => $this->gamification->getRecentTransactions($userId, 5) ?: [],
+            'unreadNotifications' => $this->notificationModel->getUnreadNotifications($userId) ?: [],
+            'currentBudgets' => $this->budgetModel->getCurrentMonthBudgets($userId) ?: [],
+            'activeSubscriptions' => $this->subscriptionModel->getActiveSubscriptions($userId) ?: [],
+            'monthlySubscriptionTotal' => $this->subscriptionModel->getMonthlyTotal($userId) ?: 0
         ];
         
         require __DIR__ . '/../Views/dashboard/index.php';

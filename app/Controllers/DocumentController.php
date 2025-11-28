@@ -81,6 +81,51 @@ class DocumentController
         exit;
     }
 
+    public function download($id)
+    {
+        Security::requireAuth();
+        
+        $document = $this->documentModel->findById($id);
+        
+        if (!$document || $document['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error'] = 'Document not found';
+            header('Location: /documents');
+            exit;
+        }
+
+        $filePath = __DIR__ . '/../../' . $document['file_path'];
+        
+        if (!file_exists($filePath)) {
+            $_SESSION['error'] = 'File not found on server';
+            header('Location: /documents');
+            exit;
+        }
+
+        $mimeTypes = [
+            'pdf' => 'application/pdf',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'doc' => 'application/msword',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'txt' => 'text/plain',
+            'csv' => 'text/csv',
+            'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ];
+
+        $ext = strtolower($document['file_type'] ?? 'txt');
+        $contentType = $mimeTypes[$ext] ?? 'application/octet-stream';
+
+        header('Content-Type: ' . $contentType);
+        header('Content-Disposition: attachment; filename="' . $document['original_name'] . '"');
+        header('Content-Length: ' . filesize($filePath));
+        header('Cache-Control: no-cache, must-revalidate');
+        
+        readfile($filePath);
+        exit;
+    }
+
     public function delete($id)
     {
         Security::requireAuth();

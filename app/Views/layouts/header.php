@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?? 'Life Atlas' ?> - Life Atlas</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -35,6 +36,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/debts"><i class="bi bi-credit-card-2-front me-2"></i>Debts</a></li>
                             <li><a class="dropdown-item" href="/assets"><i class="bi bi-building me-2"></i>Assets</a></li>
+                            <li><a class="dropdown-item" href="/crypto"><i class="bi bi-currency-bitcoin me-2"></i>Crypto Portfolio</a></li>
                         </ul>
                     </li>
                     
@@ -59,6 +61,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="/contacts"><i class="bi bi-people me-2"></i>Contacts</a></li>
+                            <li><a class="dropdown-item" href="/relationships"><i class="bi bi-people-fill me-2"></i>Relationships</a></li>
                             <li><a class="dropdown-item" href="/pets"><i class="bi bi-heart me-2"></i>Pets</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/reading"><i class="bi bi-book me-2"></i>Reading List</a></li>
@@ -75,6 +78,8 @@
                             <li><a class="dropdown-item" href="/ai-assistant"><i class="bi bi-robot me-2"></i>AI Assistant</a></li>
                             <li><a class="dropdown-item" href="/passwords"><i class="bi bi-key me-2"></i>Passwords</a></li>
                             <li><a class="dropdown-item" href="/documents"><i class="bi bi-folder me-2"></i>Documents</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/analytics"><i class="bi bi-graph-up me-2"></i>Analytics</a></li>
                         </ul>
                     </li>
                     

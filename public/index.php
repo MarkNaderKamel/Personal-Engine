@@ -56,6 +56,9 @@ require __DIR__ . '/../app/Controllers/TravelController.php';
 require __DIR__ . '/../app/Controllers/VehicleController.php';
 require __DIR__ . '/../app/Controllers/PasswordController.php';
 require __DIR__ . '/../app/Controllers/TimeTrackingController.php';
+require __DIR__ . '/../app/Controllers/CryptoController.php';
+require __DIR__ . '/../app/Controllers/RelationshipController.php';
+require __DIR__ . '/../app/Controllers/AnalyticsController.php';
 
 use App\Core\Router;
 
@@ -73,6 +76,11 @@ $router->post('/register', [$authController, 'register']);
 $router->post('/logout', [$authController, 'logout']);
 $router->get('/profile', [$authController, 'showProfile']);
 $router->post('/profile', [$authController, 'updateProfile']);
+$router->get('/forgot-password', [$authController, 'showForgotPassword']);
+$router->post('/forgot-password', [$authController, 'forgotPassword']);
+$router->get('/reset-password', [$authController, 'showResetPassword']);
+$router->post('/reset-password', [$authController, 'resetPassword']);
+$router->post('/change-password', [$authController, 'changePassword']);
 
 $dashboardController = new \App\Controllers\DashboardController();
 $router->get('/dashboard', [$dashboardController, 'index']);
@@ -105,6 +113,7 @@ $router->get('/api/notifications/unread', [$notificationController, 'getUnread']
 $documentController = new \App\Controllers\DocumentController();
 $router->get('/documents', [$documentController, 'index']);
 $router->post('/documents/upload', [$documentController, 'upload']);
+$router->get('/documents/download/{id}', [$documentController, 'download']);
 $router->post('/documents/delete/{id}', [$documentController, 'delete']);
 
 $budgetController = new \App\Controllers\BudgetController();
@@ -226,6 +235,25 @@ $router->post('/time-tracking/start', [$timeController, 'start']);
 $router->post('/time-tracking/stop/{id}', [$timeController, 'stop']);
 $router->post('/time-tracking/delete/{id}', [$timeController, 'delete']);
 $router->get('/api/time-tracking/active', [$timeController, 'getActive']);
+
+$cryptoController = new \App\Controllers\CryptoController();
+$router->get('/crypto', [$cryptoController, 'index']);
+$router->get('/crypto/create', [$cryptoController, 'create']);
+$router->post('/crypto/create', [$cryptoController, 'create']);
+$router->get('/crypto/edit/{id}', [$cryptoController, 'edit']);
+$router->post('/crypto/edit/{id}', [$cryptoController, 'edit']);
+$router->post('/crypto/delete/{id}', [$cryptoController, 'delete']);
+
+$relationshipController = new \App\Controllers\RelationshipController();
+$router->get('/relationships', [$relationshipController, 'index']);
+$router->get('/relationships/create', [$relationshipController, 'create']);
+$router->post('/relationships/create', [$relationshipController, 'create']);
+$router->get('/relationships/edit/{id}', [$relationshipController, 'edit']);
+$router->post('/relationships/edit/{id}', [$relationshipController, 'edit']);
+$router->post('/relationships/delete/{id}', [$relationshipController, 'delete']);
+
+$analyticsController = new \App\Controllers\AnalyticsController();
+$router->get('/analytics', [$analyticsController, 'index']);
 
 $router->notFound(function() {
     http_response_code(404);

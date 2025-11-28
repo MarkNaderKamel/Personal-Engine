@@ -111,10 +111,10 @@ Schema is initialized in the database with all necessary tables and indexes.
 
 ## Navigation Structure
 The navbar is organized into dropdown categories:
-- **Financial**: Bills, Budgets, Subscriptions, Debts, Assets
+- **Financial**: Bills, Budgets, Subscriptions, Debts, Assets, Crypto Portfolio
 - **Productivity**: Tasks, Projects, Time Tracking, Notes, Events, Contracts
-- **Personal**: Contacts, Pets, Reading List, Travel, Vehicles
-- **Tools**: AI Assistant, Passwords, Documents
+- **Personal**: Contacts, Relationships, Pets, Reading List, Travel, Vehicles
+- **Tools**: AI Assistant, Passwords, Documents, Analytics
 
 ## Security Considerations
 
@@ -154,7 +154,18 @@ The navbar is organized into dropdown categories:
 
 ## Recent Changes
 
-### 2025-11-28: Complete Module Implementation
+### 2025-11-28: Phase 2 - Enhanced Features & UI
+- **Crypto Portfolio Management**: Full CRUD for crypto assets with portfolio value tracking
+- **Relationships Tracker**: Manage personal/professional relationships with important dates
+- **Analytics Dashboard**: Comprehensive analytics with financial, productivity, and gamification stats
+- **Password Reset System**: Forgot password + reset password with token-based authentication
+- **Change Password**: Secure password change from profile page with current password verification
+- **Document Download**: Added download functionality for uploaded documents with proper MIME types
+- **Enhanced Login Page**: Professional UI with globe icon, gradients, forgot password link
+- **Enhanced Profile Page**: Improved design with gamification stats, badges, and password change form
+- **Enhanced Dashboard**: Comprehensive widgets showing all key metrics at a glance
+
+### 2025-11-28: Phase 1 - Complete Module Implementation
 - Added 12 new fully-functional modules:
   - Debts, Assets, Notes, Events, Contracts, Pets
   - Reading List, Travel, Vehicles, Passwords, Time Tracking, Relationships
@@ -169,6 +180,8 @@ The navbar is organized into dropdown categories:
 - Improved table styling with hover effects
 - Better mobile responsiveness
 - Professional form styling
+- Custom CSS utilities (skeleton loading, status badges, hover effects)
+- Relationship avatars and crypto icons
 
 ### Security Enhancements
 - Added CSRF tokens to all forms
@@ -176,15 +189,16 @@ The navbar is organized into dropdown categories:
 - Added database indexes on all foreign keys
 - Implemented input validation and output escaping
 - Added encrypted password storage
+- Token-based password reset with expiry
 
 ## Future Enhancements
 
 ### High Priority
 - Email verification system
-- Password reset flow
-- Enhanced analytics dashboard
+- Email-based password reset (currently token-based for demo)
 - Export to PDF/CSV
 - Two-factor authentication
+- Crypto price API integration for live prices
 
 ### Medium Priority
 - OCR document scanning
