@@ -76,10 +76,17 @@ class Database
         $fields = implode(', ', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
         
-        $sql = "INSERT INTO {$table} ({$fields}) VALUES ({$placeholders})";
-        $stmt = $this->query($sql, $data);
+        $sql = "INSERT INTO {$table} ({$fields}) VALUES ({$placeholders}) RETURNING id";
         
-        return $stmt ? $this->connection->lastInsertId() : false;
+        try {
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute($data);
+            $result = $stmt->fetch();
+            return $result ? $result['id'] : true;
+        } catch (\PDOException $e) {
+            error_log("Insert error: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function update($table, $data, $where, $whereParams = [])
