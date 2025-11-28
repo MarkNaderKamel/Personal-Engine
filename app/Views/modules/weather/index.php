@@ -152,9 +152,16 @@ use App\Core\Security;
     </div>
 </div>
 
-<div class="alert alert-info">
-    <i class="bi bi-info-circle me-2"></i>
-    <strong>Tip:</strong> Weather data is refreshed automatically. For real-time weather data, connect your weather API key in settings.
+<?php if ($data['isLive']): ?>
+<div class="alert alert-success">
+    <i class="bi bi-check-circle me-2"></i>
+    <strong>Live Weather:</strong> Data last updated at <?= $data['lastUpdated'] ?>. Weather refreshes every 30 minutes.
 </div>
+<?php else: ?>
+<div class="alert alert-warning">
+    <i class="bi bi-exclamation-triangle me-2"></i>
+    <strong>Offline Mode:</strong> Unable to fetch live weather data. Showing sample data. Please check your internet connection.
+</div>
+<?php endif; ?>
 
 <?php include __DIR__ . '/../../layouts/footer.php'; ?>

@@ -112,10 +112,17 @@ use App\Core\Security;
     </div>
 </div>
 
-<div class="alert alert-info mt-4">
-    <i class="bi bi-info-circle me-2"></i>
-    <strong>Tip:</strong> For personalized news feeds, connect your news API key in settings to get real-time articles from various sources.
+<?php if ($data['isLive']): ?>
+<div class="alert alert-success mt-4">
+    <i class="bi bi-check-circle me-2"></i>
+    <strong>Live News:</strong> Showing real-time articles from Hacker News. Last updated at <?= $data['lastUpdated'] ?>.
 </div>
+<?php else: ?>
+<div class="alert alert-warning mt-4">
+    <i class="bi bi-exclamation-triangle me-2"></i>
+    <strong>Offline Mode:</strong> Unable to fetch live news. Showing sample articles. Please check your internet connection.
+</div>
+<?php endif; ?>
 
 <script>
 function shareArticle(title) {
