@@ -1,0 +1,289 @@
+🔹 SYSTEM TYPE
+
+A personal life management super-platform (All-in-One Digital Organizer) that combines:
+
+Productivity
+
+Finance
+
+Asset tracking
+
+Personal data management
+
+AI assistance
+
+Gamification
+
+Notifications
+
+Analytics
+
+Originally built using:
+
+Frontend: React + Vite + Tailwind + shadcn/ui
+
+Backend: Supabase (Auth + Database)
+
+Target Rebuild: ✅ Full PHP System + MySQL/PostgreSQL
+
+🔹 CORE SYSTEM ARCHITECTURE
+✅ Authentication System
+
+Email & Password Login/Register
+
+Email Verification
+
+Secure Session Management
+
+Protected Routes
+
+Logout
+
+User Profile Handling
+
+✅ Global Dashboard
+
+Shows real-time stats for:
+
+Upcoming bills
+
+Pending tasks
+
+Active goals
+
+Financial transactions
+
+Crypto alerts
+
+Quick navigation to all modules
+
+✅ AI Assistant Module
+
+Chat-based AI assistant
+
+Life planning advice
+
+Task suggestions
+
+Financial & goal optimization
+
+Contextual memory
+
+Voice-support ready
+
+Integrated with user data
+
+✅ Gamification System
+
+XP Rewards for actions
+
+Daily/weekly streak tracking
+
+Leveling system
+
+Achievement badges
+
+Motivation engine
+
+Action-based XP triggers
+
+✅ Notification System
+
+In-app notifications
+
+Task reminders
+
+Bill due alerts
+
+Crypto alert notifications
+
+System activity alerts
+
+Toast messages
+
+Notification Center UI
+
+✅ File Upload & Document Scanner
+
+Upload personal documents
+
+Secure storage
+
+Document categorization
+
+OCR scanning (PDF, Images)
+
+Auto data extraction
+
+Linked to user profile
+
+✅ Analytics & Reports
+
+Usage analytics
+
+Financial analytics
+
+Productivity analytics
+
+Charts & insights
+
+Exportable reports
+
+🔹 FINANCIAL & ASSET MODULES
+✅ Bills Management
+
+Add/Edit/Delete bills
+
+Recurring bills
+
+Due date tracking
+
+Automatic reminders
+
+Enhanced Bill Module for advanced tracking
+
+✅ Budget Planning
+
+Monthly income/expense tracking
+
+Category-based budgets
+
+Budget forecasting
+
+Over-budget alerts
+
+✅ Debt Tracker
+
+Loan tracking
+
+Credit card debt
+
+Interest calculation
+
+Payoff schedules
+
+✅ Asset Management
+
+Property
+
+Vehicles
+
+Investments
+
+Digital assets
+
+✅ Crypto Module
+
+Crypto portfolio tracking
+
+Live prices
+
+Alerts on price changes
+
+Enhanced Crypto Management
+
+✅ Subscription Management
+
+Subscription renewals
+
+Monthly cost summary
+
+Cancellation reminders
+
+🔹 PERSONAL LIFE MODULES
+
+✅ Contacts Management (enhanced version)
+
+✅ Birthdays Tracking
+
+✅ Relationships Management
+
+✅ Pet Care Management
+
+✅ Reading List
+
+✅ Travel Planner
+
+✅ Vehicle Management
+
+✅ Password Manager
+
+✅ Notes + Voice Notes
+
+✅ Weather Monitoring
+
+✅ News Aggregation
+
+✅ Social Media Links Manager
+
+🔹 PRODUCTIVITY MODULES
+
+✅ Task Management
+
+✅ Project Management
+
+✅ Time Tracking
+
+✅ Contracts Management
+
+✅ Document Center
+
+✅ Events & Calendar
+
+✅ Enhanced Events System
+
+🔹 USER INTERFACE & EXPERIENCE
+
+Responsive UI (Desktop / Mobile)
+
+Sidebar Navigation
+
+Mobile Bottom Navigation
+
+Floating Action Button
+
+Clean Dashboard Widgets
+
+Light/Dark Mode Ready
+
+🔹 SECURITY FOUNDATION
+
+Secure Authentication
+
+Input Validation
+
+File Upload Validation
+
+Encrypted Password Storage
+
+Permissions per user
+
+Role Ready (Admin, User)
+
+Secure API-like structure
+
+🔹 DATABASE CONCEPT (Supabase → PHP/MySQL)
+
+Tables exist for:
+
+Users
+
+Tasks
+
+Bills
+
+Budgets
+
+Crypto Assets
+
+Documents
+
+Subscriptions
+
+Notes
+
+Projects
+
+Notifications
+
+Analytics
