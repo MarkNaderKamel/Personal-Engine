@@ -1,3 +1,4 @@
+#MIT License
 # LICENSE
 
 **Life Atlas — Proprietary License Agreement**
