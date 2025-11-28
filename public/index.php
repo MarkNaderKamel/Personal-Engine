@@ -337,9 +337,18 @@ $router->get('/social-links/edit/{id}', [$socialController, 'edit']);
 $router->post('/social-links/edit/{id}', [$socialController, 'edit']);
 $router->post('/social-links/delete/{id}', [$socialController, 'delete']);
 
+require __DIR__ . '/../app/Controllers/WeatherController.php';
+require __DIR__ . '/../app/Controllers/NewsController.php';
+
+$weatherController = new \App\Controllers\WeatherController();
+$router->get('/weather', [$weatherController, 'index']);
+
+$newsController = new \App\Controllers\NewsController();
+$router->get('/news', [$newsController, 'index']);
+
 $router->notFound(function() {
     http_response_code(404);
-    echo '404 - Page Not Found';
+    include __DIR__ . '/../app/Views/errors/404.php';
 });
 
 $router->run();

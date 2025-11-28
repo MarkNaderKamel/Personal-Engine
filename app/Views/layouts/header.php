@@ -2,31 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Life Atlas - Your All-in-One Personal Life Management Platform">
+    <meta name="theme-color" content="#667eea">
     <title><?= $pageTitle ?? 'Life Atlas' ?> - Life Atlas</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <?php if (\App\Core\Security::isAuthenticated()): ?>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="/dashboard">
                 <i class="bi bi-globe-americas me-2"></i>Life Atlas
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a>
+                        <a class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/dashboard') === 0 ? 'active' : '' ?>" href="/dashboard">
+                            <i class="bi bi-speedometer2 me-1"></i>Dashboard
+                        </a>
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-wallet2 me-1"></i>Financial
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
@@ -41,7 +48,7 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-briefcase me-1"></i>Career
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
@@ -53,7 +60,7 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-check2-square me-1"></i>Productivity
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
@@ -69,7 +76,7 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-heart me-1"></i>Personal
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
@@ -86,7 +93,7 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-tools me-1"></i>Tools
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
@@ -94,6 +101,8 @@
                             <li><a class="dropdown-item" href="/passwords"><i class="bi bi-key me-2"></i>Passwords</a></li>
                             <li><a class="dropdown-item" href="/documents"><i class="bi bi-folder me-2"></i>Documents</a></li>
                             <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/weather"><i class="bi bi-cloud-sun me-2"></i>Weather</a></li>
+                            <li><a class="dropdown-item" href="/news"><i class="bi bi-newspaper me-2"></i>News</a></li>
                             <li><a class="dropdown-item" href="/analytics"><i class="bi bi-graph-up me-2"></i>Analytics</a></li>
                         </ul>
                     </li>
@@ -113,16 +122,23 @@
                     </li>
                     <?php endif; ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle me-1"></i><?= htmlspecialchars($_SESSION['user_name'] ?? 'Account') ?>
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="bg-primary-soft rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                                <i class="bi bi-person"></i>
+                            </div>
+                            <span class="d-none d-lg-inline"><?= htmlspecialchars($_SESSION['user_name'] ?? 'Account') ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            <li class="px-3 py-2 border-bottom border-secondary">
+                                <small class="text-muted">Signed in as</small>
+                                <div class="fw-bold"><?= htmlspecialchars($_SESSION['user_email'] ?? '') ?></div>
+                            </li>
                             <li><a class="dropdown-item" href="/profile"><i class="bi bi-gear me-2"></i>Profile Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="/logout">
                                     <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
-                                    <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+                                    <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
                                 </form>
                             </li>
                         </ul>
@@ -133,17 +149,44 @@
     </nav>
     <?php endif; ?>
     
-    <div class="container-fluid">
-        <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            <i class="bi bi-check-circle me-2"></i><?= htmlspecialchars($_SESSION['success']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-        <?php unset($_SESSION['success']); endif; ?>
-        
-        <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-            <i class="bi bi-exclamation-triangle me-2"></i><?= htmlspecialchars($_SESSION['error']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-        <?php unset($_SESSION['error']); endif; ?>
+    <main class="<?= \App\Core\Security::isAuthenticated() ? 'py-4' : '' ?>">
+        <div class="container-fluid">
+            <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2 fs-5"></i>
+                    <div><?= htmlspecialchars($_SESSION['success']) ?></div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['success']); endif; ?>
+            
+            <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+                    <div><?= htmlspecialchars($_SESSION['error']) ?></div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['error']); endif; ?>
+            
+            <?php if (isset($_SESSION['warning'])): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-exclamation-circle-fill me-2 fs-5"></i>
+                    <div><?= htmlspecialchars($_SESSION['warning']) ?></div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['warning']); endif; ?>
+            
+            <?php if (isset($_SESSION['info'])): ?>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                    <div><?= htmlspecialchars($_SESSION['info']) ?></div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['info']); endif; ?>
