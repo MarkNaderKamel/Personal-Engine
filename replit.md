@@ -10,6 +10,7 @@ Life Atlas is a comprehensive personal life management platform built with pure 
 - **No Framework**: Pure PHP implementation for maximum control and learning
 - **Database**: PostgreSQL with normalized schema and indexes
 - **Frontend**: Bootstrap 5 with responsive design and modern gradients
+- **Navigation**: Collapsible left sidebar with organized sections
 
 ### Directory Structure
 ```
@@ -18,7 +19,7 @@ Life Atlas is a comprehensive personal life management platform built with pure 
 │   ├── Controllers/   # Request handling and business logic
 │   ├── Models/        # Data layer and database interactions
 │   ├── Views/         # HTML templates (PHP files)
-│   │   ├── layouts/   # Header, footer templates
+│   │   ├── layouts/   # Header (sidebar), footer templates
 │   │   ├── auth/      # Login, register views
 │   │   └── modules/   # Feature-specific views
 │   └── Core/          # Core classes (Database, Router, Security, Model)
@@ -43,34 +44,49 @@ Life Atlas is a comprehensive personal life management platform built with pure 
 
 ### Financial Management
 - **Bills**: Track one-time and recurring bills with alerts
+- **Transactions**: Income/expense tracking with categories
 - **Budgets**: Monthly budget planning by category
 - **Subscriptions**: Manage all subscriptions and track monthly costs
 - **Debts**: Loan and credit card tracking with interest rates and payment schedules
 - **Assets**: Property and investment tracking with valuation
+- **Crypto Portfolio**: Track cryptocurrency holdings with prices
+
+### Career
+- **Job Applications**: Full job search tracker with status workflow
+- **CV Manager**: Multi-resume builder with experience, education, skills, certifications
+- **Goals**: Goal tracking with progress percentages and milestones
 
 ### Productivity
 - **Tasks**: Create and track tasks with priorities and due dates
 - **Projects**: Organize tasks into projects
 - **Time Tracking**: Track time spent on tasks with start/stop timer
+- **Habits**: Daily habit tracking with streaks
+- **Notes**: Rich text notes with favorites and tagging
 - **Events**: Calendar and event management with reminders
 - **Contracts**: Store and track contracts with expiry alerts
-- **Notes**: Rich text notes with favorites and tagging
 
 ### Personal Life
 - **Contacts**: Store contact information with birthday reminders
+- **Relationships**: Manage personal/professional relationships
+- **Birthdays**: Birthday tracking with reminders
 - **Pets**: Pet care management with vet checkups
 - **Reading List**: Book tracking with progress and ratings
 - **Travel Plans**: Trip planning with budgets and itineraries
 - **Vehicles**: Maintenance and insurance tracking
+- **Social Links**: Manage social media profiles
+
+### Tools
+- **AI Assistant**: Chat interface with OpenAI integration
 - **Password Manager**: Encrypted password storage with categories
+- **Document Management**: Secure file upload and storage
+- **Weather**: Weather information display
+- **News**: News feed display
+- **Analytics**: Usage tracking and XP history
 
 ### System Features
-- **AI Assistant**: Chat interface with OpenAI integration
 - **Gamification**: XP points, levels, streaks, and badges
 - **Notifications**: In-app notification center with AJAX updates
-- **Document Management**: Secure file upload and storage
 - **Admin Panel**: User management, system monitoring, activity logs
-- **Analytics**: Usage tracking and XP history
 
 ## Tech Stack
 
@@ -87,6 +103,7 @@ Life Atlas is a comprehensive personal life management platform built with pure 
 - AJAX for real-time updates
 - Responsive mobile design
 - Modern gradient styling
+- Collapsible left sidebar navigation
 
 ## Development
 
@@ -102,20 +119,27 @@ Database is automatically configured via environment variables:
 
 Schema is initialized in the database with all necessary tables and indexes.
 
+### Test Credentials
+- Email: demo@lifeatlas.app
+- Password: password
+
 ### Adding a New Module
 1. Create Model in `app/Models/`
 2. Create Controller in `app/Controllers/`
 3. Create Views in `app/Views/modules/[module-name]/`
 4. Add routes in `public/index.php`
-5. Update navigation in `app/Views/layouts/header.php`
+5. Add navigation link in sidebar (`app/Views/layouts/header.php`)
 
-## Navigation Structure
-The navbar is organized into dropdown categories:
-- **Financial**: Bills, Budgets, Subscriptions, Debts, Assets, Crypto Portfolio
+## Navigation Structure (Left Sidebar)
+The navigation is organized into collapsible sections in the left sidebar:
+
+- **Dashboard**: Main overview
+- **Financial**: Transactions, Bills, Budgets, Subscriptions, Debts, Assets, Crypto Portfolio
 - **Career**: Job Applications, CV Manager, Goals
 - **Productivity**: Tasks, Projects, Time Tracking, Habits, Notes, Events, Contracts
 - **Personal**: Contacts, Relationships, Birthdays, Pets, Reading List, Travel, Vehicles, Social Links
-- **Tools**: AI Assistant, Passwords, Documents, Analytics
+- **Tools**: AI Assistant, Passwords, Documents, Weather, News, Analytics
+- **Admin** (admin only): Dashboard, Users, Logs
 
 ## Security Considerations
 
@@ -155,83 +179,41 @@ The navbar is organized into dropdown categories:
 
 ## Recent Changes
 
+### 2025-11-28: Phase 5 - Major Navigation Redesign
+- **Sidebar Navigation**: Moved all navigation from top header to collapsible left sidebar
+- **Organized Sections**: Navigation now grouped into Financial, Career, Productivity, Personal, Tools, and Admin sections
+- **Mobile Support**: Bottom navigation bar for mobile devices with quick access icons
+- **User Stats**: XP level, streak, and points displayed in sidebar footer
+- **Top Header**: Simplified header with sidebar toggle, notifications, and user menu
+- **Responsive Design**: Sidebar collapses to overlay on tablets and hides on mobile
+- **Modern Styling**: Dark gradient sidebar with hover effects and active state indicators
+
 ### 2025-11-28: Phase 4 - Edit Functionality & UI Enhancement
 - **Task Management**: Added full edit functionality with status, priority, and due date modification
 - **Budget Management**: Added edit functionality plus quick expense addition via modal dialogs
 - **Subscription Management**: Added edit functionality with pause/reactivate toggle buttons
 - **Contact Management**: Added edit and detailed view functionality with quick actions
 - **UI Improvements**: Updated all action buttons to use icon-based button groups for cleaner interface
-- **Route Updates**: Added all missing edit routes to the router (tasks/edit, budgets/edit, subscriptions/edit, contacts/edit, contacts/view)
-- **Progress Indicators**: Added visual progress bars on budget edit page
 
 ### 2025-11-28: Phase 3 - Career & Personal Management Modules
-- **Job Application Tracker**: Complete CRUD for job applications with status tracking (applied, interviewing, offered, rejected, accepted), priority levels, interview scheduling, contact management, and statistics dashboard
-- **CV/Resume Manager**: Multi-resume support with work experience, education, skills (categorized), and certifications management. Default resume selection and file upload support
-- **Goals Module**: Goal tracking with categories, priorities, progress percentages, milestones, and target dates. Visual progress bars and status management
-- **Habits Tracker**: Daily habit tracking with frequency settings (daily, weekly, weekdays, weekends), categories, color coding, weekly progress, and completion logging
-- **Birthdays Manager**: Birthday tracking with relationship categories, reminder settings, gift ideas, and upcoming birthday alerts with days-until calculation
-- **Social Links**: Manage social media profiles with platform recognition, public/private visibility, and organized card display
-- **Enhanced Dashboard**: Added widgets for Jobs, Goals, Habits, and Birthdays with quick actions and progress tracking
-- **Updated Navigation**: Added "Career" dropdown with Job Applications, CV Manager, and Goals. Added Habits to Productivity, Birthdays and Social Links to Personal
+- **Job Application Tracker**: Complete CRUD for job applications with status tracking
+- **CV/Resume Manager**: Multi-resume support with work experience, education, skills, certifications
+- **Goals Module**: Goal tracking with categories, priorities, progress, milestones
+- **Habits Tracker**: Daily habit tracking with streaks and categories
+- **Birthdays Manager**: Birthday tracking with reminders and gift ideas
+- **Social Links**: Manage social media profiles
 
 ### 2025-11-28: Phase 2 - Enhanced Features & UI
-- **Crypto Portfolio Management**: Full CRUD for crypto assets with portfolio value tracking
-- **Relationships Tracker**: Manage personal/professional relationships with important dates
-- **Analytics Dashboard**: Comprehensive analytics with financial, productivity, and gamification stats
-- **Password Reset System**: Forgot password + reset password with token-based authentication
-- **Change Password**: Secure password change from profile page with current password verification
-- **Document Download**: Added download functionality for uploaded documents with proper MIME types
-- **Enhanced Login Page**: Professional UI with globe icon, gradients, forgot password link
-- **Enhanced Profile Page**: Improved design with gamification stats, badges, and password change form
-- **Enhanced Dashboard**: Comprehensive widgets showing all key metrics at a glance
+- **Crypto Portfolio Management**: Full CRUD for crypto assets
+- **Relationships Tracker**: Manage personal/professional relationships
+- **Analytics Dashboard**: Comprehensive analytics
+- **Password Reset System**: Token-based reset
 
 ### 2025-11-28: Phase 1 - Complete Module Implementation
-- Added 12 new fully-functional modules:
-  - Debts, Assets, Notes, Events, Contracts, Pets
-  - Reading List, Travel, Vehicles, Passwords, Time Tracking, Relationships
+- Added 12 new fully-functional modules
 - Created full CRUD operations for all modules
 - Enhanced UI with modern gradient styling
-- Updated navigation with organized dropdowns
 - Added gamification integration to all modules
-
-### UI Enhancements
-- Modern gradient backgrounds on cards
-- Subtle animations and transitions
-- Improved table styling with hover effects
-- Better mobile responsiveness
-- Professional form styling
-- Custom CSS utilities (skeleton loading, status badges, hover effects)
-- Relationship avatars and crypto icons
-
-### Security Enhancements
-- Added CSRF tokens to all forms
-- Changed DELETE operations to POST requests
-- Added database indexes on all foreign keys
-- Implemented input validation and output escaping
-- Added encrypted password storage
-- Token-based password reset with expiry
-
-## Future Enhancements
-
-### High Priority
-- Email verification system
-- Email-based password reset (currently token-based for demo)
-- Export to PDF/CSV
-- Two-factor authentication
-- Crypto price API integration for live prices
-
-### Medium Priority
-- OCR document scanning
-- Voice notes recording
-- Crypto price API integration
-- Weather API integration
-- Dark mode toggle
-
-### Low Priority
-- Mobile app (React Native)
-- Multi-language support
-- Advanced charts and visualizations
-- Social sharing features
 
 ## User Preferences
 None specified yet.
@@ -249,15 +231,6 @@ None specified yet.
 UPDATE users SET role = 'admin' WHERE email = 'user@example.com';
 ```
 
-### Add Test Data
-```sql
-INSERT INTO tasks (user_id, title, priority, status) 
-VALUES (1, 'Test Task', 'high', 'pending');
-
-INSERT INTO bills (user_id, bill_name, amount, due_date, category) 
-VALUES (1, 'Electricity', 150.00, CURRENT_DATE + INTERVAL '7 days', 'utilities');
-```
-
 ### Check Database Connection
 The app will fail to load if database connection is not working. Check:
 1. Environment variables are set correctly
@@ -272,11 +245,6 @@ The app will fail to load if database connection is not working. Check:
 3. **CSRF errors**: Clear browser cookies and restart session
 4. **File upload fails**: Check directory permissions (755 for uploads/)
 5. **AI not working**: Verify OPENAI_API_KEY is set in secrets
-
-## Documentation
-- See README.md for feature overview
-- See INSTALLATION.md for deployment guide
-- Inline code comments for detailed logic
 
 ## Last Updated
 November 28, 2025
