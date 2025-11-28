@@ -59,6 +59,80 @@ class BudgetController
         require __DIR__ . '/../Views/modules/budgets/create.php';
     }
 
+    public function edit($id)
+    {
+        Security::requireAuth();
+        
+        $budget = $this->budgetModel->findById($id);
+        
+        if (!$budget || $budget['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error'] = 'Budget not found';
+            header('Location: /budgets');
+            exit;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+                $_SESSION['error'] = 'Invalid security token';
+                header('Location: /budgets');
+                exit;
+            }
+
+            $data = [
+                'category' => Security::sanitizeInput($_POST['category']),
+                'budgeted_amount' => floatval($_POST['budgeted_amount']),
+                'spent_amount' => floatval($_POST['spent_amount'] ?? $budget['spent_amount'])
+            ];
+
+            if ($this->budgetModel->update($id, $data)) {
+                $_SESSION['success'] = 'Budget updated successfully';
+            } else {
+                $_SESSION['error'] = 'Failed to update budget';
+            }
+
+            header('Location: /budgets');
+            exit;
+        }
+
+        require __DIR__ . '/../Views/modules/budgets/edit.php';
+    }
+
+    public function addExpense($id)
+    {
+        Security::requireAuth();
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /budgets');
+            exit;
+        }
+
+        if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+            $_SESSION['error'] = 'Invalid security token';
+            header('Location: /budgets');
+            exit;
+        }
+
+        $budget = $this->budgetModel->findById($id);
+        
+        if (!$budget || $budget['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error'] = 'Budget not found';
+            header('Location: /budgets');
+            exit;
+        }
+
+        $amount = floatval($_POST['amount'] ?? 0);
+        $newSpent = $budget['spent_amount'] + $amount;
+        
+        if ($this->budgetModel->update($id, ['spent_amount' => $newSpent])) {
+            $_SESSION['success'] = 'Expense added successfully';
+        } else {
+            $_SESSION['error'] = 'Failed to add expense';
+        }
+
+        header('Location: /budgets');
+        exit;
+    }
+
     public function delete($id)
     {
         Security::requireAuth();

@@ -53,10 +53,48 @@ use App\Core\Security;
                         $<?= number_format($remaining, 2) ?>
                     </td>
                     <td>
-                        <form method="POST" action="/budgets/delete/<?= $budget['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
-                            <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <div class="btn-group" role="group">
+                            <a href="/budgets/edit/<?= $budget['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-success" title="Add Expense" 
+                                    data-bs-toggle="modal" data-bs-target="#addExpenseModal<?= $budget['id'] ?>">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                            <form method="POST" action="/budgets/delete/<?= $budget['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this budget?')">
+                                <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="modal fade" id="addExpenseModal<?= $budget['id'] ?>" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add Expense to <?= Security::sanitizeOutput($budget['category']) ?></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <form method="POST" action="/budgets/add-expense/<?= $budget['id'] ?>">
+                                        <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="amount<?= $budget['id'] ?>" class="form-label">Amount</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">$</span>
+                                                    <input type="number" step="0.01" class="form-control" id="amount<?= $budget['id'] ?>" name="amount" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Add Expense</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>

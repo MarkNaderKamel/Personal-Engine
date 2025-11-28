@@ -43,16 +43,25 @@ use App\Core\Security;
                     </td>
                     <td><?= $task['due_date'] ? date('M d, Y', strtotime($task['due_date'])) : 'N/A' ?></td>
                     <td>
-                        <?php if ($task['status'] != 'completed'): ?>
-                        <form method="POST" action="/tasks/complete/<?= $task['id'] ?>" style="display:inline;">
-                            <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
-                            <button type="submit" class="btn btn-sm btn-success">Complete</button>
-                        </form>
-                        <?php endif; ?>
-                        <form method="POST" action="/tasks/delete/<?= $task['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
-                            <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <div class="btn-group" role="group">
+                            <a href="/tasks/edit/<?= $task['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <?php if ($task['status'] != 'completed'): ?>
+                            <form method="POST" action="/tasks/complete/<?= $task['id'] ?>" style="display:inline;">
+                                <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-success" title="Complete">
+                                    <i class="bi bi-check-lg"></i>
+                                </button>
+                            </form>
+                            <?php endif; ?>
+                            <form method="POST" action="/tasks/delete/<?= $task['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this task?')">
+                                <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>

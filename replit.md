@@ -155,6 +155,15 @@ The navbar is organized into dropdown categories:
 
 ## Recent Changes
 
+### 2025-11-28: Phase 4 - Edit Functionality & UI Enhancement
+- **Task Management**: Added full edit functionality with status, priority, and due date modification
+- **Budget Management**: Added edit functionality plus quick expense addition via modal dialogs
+- **Subscription Management**: Added edit functionality with pause/reactivate toggle buttons
+- **Contact Management**: Added edit and detailed view functionality with quick actions
+- **UI Improvements**: Updated all action buttons to use icon-based button groups for cleaner interface
+- **Route Updates**: Added all missing edit routes to the router (tasks/edit, budgets/edit, subscriptions/edit, contacts/edit, contacts/view)
+- **Progress Indicators**: Added visual progress bars on budget edit page
+
 ### 2025-11-28: Phase 3 - Career & Personal Management Modules
 - **Job Application Tracker**: Complete CRUD for job applications with status tracking (applied, interviewing, offered, rejected, accepted), priority levels, interview scheduling, contact management, and statistics dashboard
 - **CV/Resume Manager**: Multi-resume support with work experience, education, skills (categorized), and certifications management. Default resume selection and file upload support

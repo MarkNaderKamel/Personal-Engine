@@ -62,6 +62,64 @@ class ContactController
         require __DIR__ . '/../Views/modules/contacts/create.php';
     }
 
+    public function edit($id)
+    {
+        Security::requireAuth();
+        
+        $contact = $this->contactModel->findById($id);
+        
+        if (!$contact || $contact['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error'] = 'Contact not found';
+            header('Location: /contacts');
+            exit;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+                $_SESSION['error'] = 'Invalid security token';
+                header('Location: /contacts');
+                exit;
+            }
+
+            $data = [
+                'full_name' => Security::sanitizeInput($_POST['full_name']),
+                'email' => Security::sanitizeInput($_POST['email'] ?? ''),
+                'phone' => Security::sanitizeInput($_POST['phone'] ?? ''),
+                'company' => Security::sanitizeInput($_POST['company'] ?? ''),
+                'relationship' => Security::sanitizeInput($_POST['relationship'] ?? ''),
+                'birthday' => $_POST['birthday'] ?? null,
+                'address' => Security::sanitizeInput($_POST['address'] ?? ''),
+                'notes' => Security::sanitizeInput($_POST['notes'] ?? '')
+            ];
+
+            if ($this->contactModel->update($id, $data)) {
+                $_SESSION['success'] = 'Contact updated successfully';
+            } else {
+                $_SESSION['error'] = 'Failed to update contact';
+            }
+
+            header('Location: /contacts');
+            exit;
+        }
+
+        require __DIR__ . '/../Views/modules/contacts/edit.php';
+    }
+
+    public function view($id)
+    {
+        Security::requireAuth();
+        
+        $contact = $this->contactModel->findById($id);
+        
+        if (!$contact || $contact['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error'] = 'Contact not found';
+            header('Location: /contacts');
+            exit;
+        }
+
+        require __DIR__ . '/../Views/modules/contacts/view.php';
+    }
+
     public function delete($id)
     {
         Security::requireAuth();

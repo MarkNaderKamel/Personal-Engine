@@ -48,10 +48,20 @@ use App\Core\Security;
                     <td><?= Security::sanitizeOutput($contact['relationship']) ?></td>
                     <td><?= $contact['birthday'] ? date('M d, Y', strtotime($contact['birthday'])) : 'N/A' ?></td>
                     <td>
-                        <form method="POST" action="/contacts/delete/<?= $contact['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
-                            <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <div class="btn-group" role="group">
+                            <a href="/contacts/view/<?= $contact['id'] ?>" class="btn btn-sm btn-outline-info" title="View">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a href="/contacts/edit/<?= $contact['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form method="POST" action="/contacts/delete/<?= $contact['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this contact?')">
+                                <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>

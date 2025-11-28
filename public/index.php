@@ -71,6 +71,7 @@ require __DIR__ . '/../app/Controllers/GoalController.php';
 require __DIR__ . '/../app/Controllers/BirthdayController.php';
 require __DIR__ . '/../app/Controllers/HabitController.php';
 require __DIR__ . '/../app/Controllers/SocialLinkController.php';
+require __DIR__ . '/../app/Controllers/TransactionController.php';
 
 use App\Core\Router;
 
@@ -109,6 +110,8 @@ $taskController = new \App\Controllers\TaskController();
 $router->get('/tasks', [$taskController, 'index']);
 $router->get('/tasks/create', [$taskController, 'create']);
 $router->post('/tasks/create', [$taskController, 'create']);
+$router->get('/tasks/edit/{id}', [$taskController, 'edit']);
+$router->post('/tasks/edit/{id}', [$taskController, 'edit']);
 $router->post('/tasks/complete/{id}', [$taskController, 'complete']);
 $router->post('/tasks/delete/{id}', [$taskController, 'delete']);
 
@@ -132,18 +135,36 @@ $budgetController = new \App\Controllers\BudgetController();
 $router->get('/budgets', [$budgetController, 'index']);
 $router->get('/budgets/create', [$budgetController, 'create']);
 $router->post('/budgets/create', [$budgetController, 'create']);
+$router->get('/budgets/edit/{id}', [$budgetController, 'edit']);
+$router->post('/budgets/edit/{id}', [$budgetController, 'edit']);
+$router->post('/budgets/add-expense/{id}', [$budgetController, 'addExpense']);
 $router->post('/budgets/delete/{id}', [$budgetController, 'delete']);
+
+$transactionController = new \App\Controllers\TransactionController();
+$router->get('/transactions', [$transactionController, 'index']);
+$router->get('/transactions/create', [$transactionController, 'create']);
+$router->post('/transactions/create', [$transactionController, 'create']);
+$router->get('/transactions/edit/{id}', [$transactionController, 'edit']);
+$router->post('/transactions/edit/{id}', [$transactionController, 'edit']);
+$router->post('/transactions/delete/{id}', [$transactionController, 'delete']);
+$router->get('/transactions/report', [$transactionController, 'report']);
 
 $subscriptionController = new \App\Controllers\SubscriptionController();
 $router->get('/subscriptions', [$subscriptionController, 'index']);
 $router->get('/subscriptions/create', [$subscriptionController, 'create']);
 $router->post('/subscriptions/create', [$subscriptionController, 'create']);
+$router->get('/subscriptions/edit/{id}', [$subscriptionController, 'edit']);
+$router->post('/subscriptions/edit/{id}', [$subscriptionController, 'edit']);
+$router->post('/subscriptions/toggle-status/{id}', [$subscriptionController, 'toggleStatus']);
 $router->post('/subscriptions/delete/{id}', [$subscriptionController, 'delete']);
 
 $contactController = new \App\Controllers\ContactController();
 $router->get('/contacts', [$contactController, 'index']);
 $router->get('/contacts/create', [$contactController, 'create']);
 $router->post('/contacts/create', [$contactController, 'create']);
+$router->get('/contacts/view/{id}', [$contactController, 'view']);
+$router->get('/contacts/edit/{id}', [$contactController, 'edit']);
+$router->post('/contacts/edit/{id}', [$contactController, 'edit']);
 $router->post('/contacts/delete/{id}', [$contactController, 'delete']);
 
 $projectController = new \App\Controllers\ProjectController();

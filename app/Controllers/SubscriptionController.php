@@ -61,6 +61,75 @@ class SubscriptionController
         require __DIR__ . '/../Views/modules/subscriptions/create.php';
     }
 
+    public function edit($id)
+    {
+        Security::requireAuth();
+        
+        $subscription = $this->subscriptionModel->findById($id);
+        
+        if (!$subscription || $subscription['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error'] = 'Subscription not found';
+            header('Location: /subscriptions');
+            exit;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+                $_SESSION['error'] = 'Invalid security token';
+                header('Location: /subscriptions');
+                exit;
+            }
+
+            $data = [
+                'service_name' => Security::sanitizeInput($_POST['service_name']),
+                'cost' => floatval($_POST['cost']),
+                'billing_cycle' => $_POST['billing_cycle'],
+                'next_billing_date' => $_POST['next_billing_date'],
+                'category' => Security::sanitizeInput($_POST['category'] ?? ''),
+                'status' => $_POST['status'] ?? 'active',
+                'notes' => Security::sanitizeInput($_POST['notes'] ?? '')
+            ];
+
+            if ($this->subscriptionModel->update($id, $data)) {
+                $_SESSION['success'] = 'Subscription updated successfully';
+            } else {
+                $_SESSION['error'] = 'Failed to update subscription';
+            }
+
+            header('Location: /subscriptions');
+            exit;
+        }
+
+        require __DIR__ . '/../Views/modules/subscriptions/edit.php';
+    }
+
+    public function toggleStatus($id)
+    {
+        Security::requireAuth();
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /subscriptions');
+            exit;
+        }
+
+        if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+            $_SESSION['error'] = 'Invalid security token';
+            header('Location: /subscriptions');
+            exit;
+        }
+
+        $subscription = $this->subscriptionModel->findById($id);
+        
+        if ($subscription && $subscription['user_id'] == $_SESSION['user_id']) {
+            $newStatus = $subscription['status'] == 'active' ? 'cancelled' : 'active';
+            $this->subscriptionModel->update($id, ['status' => $newStatus]);
+            $_SESSION['success'] = 'Subscription status updated';
+        }
+
+        header('Location: /subscriptions');
+        exit;
+    }
+
     public function delete($id)
     {
         Security::requireAuth();

@@ -47,10 +47,24 @@ use App\Core\Security;
                         </span>
                     </td>
                     <td>
-                        <form method="POST" action="/subscriptions/delete/<?= $sub['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
-                            <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <div class="btn-group" role="group">
+                            <a href="/subscriptions/edit/<?= $sub['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form method="POST" action="/subscriptions/toggle-status/<?= $sub['id'] ?>" style="display:inline;">
+                                <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-<?= $sub['status'] == 'active' ? 'warning' : 'success' ?>" 
+                                        title="<?= $sub['status'] == 'active' ? 'Cancel' : 'Reactivate' ?>">
+                                    <i class="bi bi-<?= $sub['status'] == 'active' ? 'pause' : 'play' ?>"></i>
+                                </button>
+                            </form>
+                            <form method="POST" action="/subscriptions/delete/<?= $sub['id'] ?>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this subscription?')">
+                                <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCSRFToken() ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>

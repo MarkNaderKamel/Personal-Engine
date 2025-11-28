@@ -82,6 +82,46 @@ class TaskController
         exit;
     }
 
+    public function edit($id)
+    {
+        Security::requireAuth();
+        
+        $task = $this->taskModel->findById($id);
+        
+        if (!$task || $task['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error'] = 'Task not found';
+            header('Location: /tasks');
+            exit;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+                $_SESSION['error'] = 'Invalid security token';
+                header('Location: /tasks');
+                exit;
+            }
+
+            $data = [
+                'title' => Security::sanitizeInput($_POST['title']),
+                'description' => Security::sanitizeInput($_POST['description'] ?? ''),
+                'priority' => $_POST['priority'] ?? 'medium',
+                'status' => $_POST['status'] ?? 'pending',
+                'due_date' => $_POST['due_date'] ?? null
+            ];
+
+            if ($this->taskModel->update($id, $data)) {
+                $_SESSION['success'] = 'Task updated successfully';
+            } else {
+                $_SESSION['error'] = 'Failed to update task';
+            }
+
+            header('Location: /tasks');
+            exit;
+        }
+
+        require __DIR__ . '/../Views/modules/tasks/edit.php';
+    }
+
     public function delete($id)
     {
         Security::requireAuth();

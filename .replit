@@ -1,4 +1,4 @@
-modules = ["php-8.2", "web", "nodejs-20"]
+modules = ["php-8.2", "web", "nodejs-20", "postgresql-16"]
 [agent]
 expertMode = true
 
@@ -42,7 +42,7 @@ localPort = 36969
 externalPort = 3000
 
 [[ports]]
-localPort = 40463
+localPort = 44413
 externalPort = 3003
 
 [[ports]]

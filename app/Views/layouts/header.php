@@ -37,6 +37,7 @@
                             <i class="bi bi-wallet2 me-1"></i>Financial
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="/transactions"><i class="bi bi-cash-stack me-2"></i>Transactions</a></li>
                             <li><a class="dropdown-item" href="/bills"><i class="bi bi-receipt me-2"></i>Bills</a></li>
                             <li><a class="dropdown-item" href="/budgets"><i class="bi bi-pie-chart me-2"></i>Budgets</a></li>
                             <li><a class="dropdown-item" href="/subscriptions"><i class="bi bi-arrow-repeat me-2"></i>Subscriptions</a></li>
