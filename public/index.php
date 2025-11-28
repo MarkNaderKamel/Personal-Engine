@@ -38,6 +38,7 @@ require __DIR__ . '/../app/Models/Goal.php';
 require __DIR__ . '/../app/Models/Birthday.php';
 require __DIR__ . '/../app/Models/Habit.php';
 require __DIR__ . '/../app/Models/SocialLink.php';
+require __DIR__ . '/../app/Models/Transaction.php';
 
 require __DIR__ . '/../app/Controllers/AuthController.php';
 require __DIR__ . '/../app/Controllers/DashboardController.php';
