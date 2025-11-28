@@ -1,0 +1,55 @@
+Goal: Research, design, and implement new features and modules; complete and harden any partially developed modules; improve the UI so the app looks professional; and move all navigation buttons into a left sidebar (not the header). Deliver working, well-structured, and tested features.
+
+Instructions for the developer / team / AI agent
+
+Research & propose
+
+Investigate and list at least 6 new feature/module ideas relevant to the system (brief description, user value, priority level: high/medium/low).
+
+For each proposed idea, include a rough implementation plan (components, data model changes, API endpoints, and UI mockup notes).
+
+Implementation & completion
+
+Start implementing the approved features and modules immediately. Prioritize incomplete modules first (bug fixes, missing logic, integrations).
+
+Ensure every module has: clear folder structure, tests (unit/integration where applicable), and documentation (README and brief usage notes).
+
+UI / UX changes
+
+Move all navigation buttons and links from the header into a collapsible left sidebar with clearly grouped sections. The header should contain only essential global actions (e.g., profile, notifications).
+
+Polish the UI across the app to a professional standard (consistent spacing, typography, color scheme, accessible components). Provide before/after screenshots or short screen recordings for major pages.
+
+Quality & reliability
+
+Validate that all features behave as expected: input validation, error handling, edge cases.
+
+Add logging for critical actions and graceful fallbacks for failures.
+
+Write and run automated tests and provide a test report (tests passed/failed, coverage summary).
+
+Deployment & verification
+
+Build and deploy to the staging environment after major milestones. Provide a deploy checklist and rollback instructions.
+
+Provide a smoke-test guide for QA to verify core user flows.
+
+Deliverables
+
+Updated project plan with priorities and timelines (high-level).
+
+Patch/PRs for completed work with clear descriptions and linked issues.
+
+A short demo (video or sequence of screenshots) showing new/updated features.
+
+Documentation: changelog, updated README, and a short developer onboarding note for the new modules.
+
+Acceptance criteria
+
+All navigation buttons are available only in the left sidebar and function correctly.
+
+Previously undeveloped modules are implemented, documented, and covered by tests.
+
+UI looks consistent and professional across main screens.
+
+No blocking errors in staging; core flows pass smoke tests.

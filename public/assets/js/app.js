@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    initSidebar();
     initNotifications();
     initAlerts();
     initAnimations();
@@ -12,8 +13,49 @@ document.addEventListener('DOMContentLoaded', function() {
     initCounterAnimations();
     initCardHoverEffects();
     initSearchHighlight();
-    initMobileNav();
+    initMobileBottomNav();
 });
+
+function initSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    
+    if (!sidebar) return;
+    
+    function openSidebar() {
+        sidebar.classList.add('active');
+        sidebarOverlay?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        sidebarOverlay?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    sidebarToggle?.addEventListener('click', openSidebar);
+    sidebarClose?.addEventListener('click', closeSidebar);
+    sidebarOverlay?.addEventListener('click', closeSidebar);
+    mobileMenuBtn?.addEventListener('click', openSidebar);
+    
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 1200) {
+                closeSidebar();
+            }
+        });
+    });
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1200) {
+            closeSidebar();
+        }
+    });
+}
 
 function initNotifications() {
     const badge = document.getElementById('notificationCount');
@@ -92,7 +134,7 @@ function initFloatingActionButton() {
     const fabContainer = document.querySelector('.fab-container');
     if (fabContainer) return;
     
-    const isLoggedIn = document.querySelector('.navbar-nav');
+    const isLoggedIn = document.querySelector('.sidebar');
     if (!isLoggedIn) return;
     
     const fab = document.createElement('div');
@@ -146,50 +188,6 @@ function initThemeToggle() {
     if (saved === 'dark') {
         document.body.setAttribute('data-theme', 'dark');
     }
-    
-    const navbar = document.querySelector('.navbar-nav.ms-auto, .navbar-nav:last-child');
-    if (!navbar) return;
-    
-    const existing = document.querySelector('.theme-toggle');
-    if (existing) return;
-    
-    const themeToggle = document.createElement('li');
-    themeToggle.className = 'nav-item';
-    themeToggle.innerHTML = `
-        <button class="theme-toggle nav-link" aria-label="Toggle Theme">
-            <i class="bi bi-moon-stars"></i>
-        </button>
-    `;
-    
-    const firstChild = navbar.firstChild;
-    if (firstChild) {
-        navbar.insertBefore(themeToggle, firstChild);
-    } else {
-        navbar.appendChild(themeToggle);
-    }
-    
-    themeToggle.querySelector('button').addEventListener('click', toggleTheme);
-    updateThemeIcon();
-}
-
-function toggleTheme() {
-    const isDark = document.body.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-        document.body.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-    } else {
-        document.body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    }
-    updateThemeIcon();
-}
-
-function updateThemeIcon() {
-    const icon = document.querySelector('.theme-toggle i');
-    if (!icon) return;
-    
-    const isDark = document.body.getAttribute('data-theme') === 'dark';
-    icon.className = isDark ? 'bi bi-sun' : 'bi bi-moon-stars';
 }
 
 function initSmoothScroll() {
@@ -244,9 +242,6 @@ function initRippleEffect() {
 
 function initFormEnhancements() {
     document.querySelectorAll('.form-control, .form-select').forEach(input => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'form-floating-wrapper';
-        
         input.addEventListener('focus', function() {
             this.parentElement.classList.add('input-focused');
         });
@@ -404,43 +399,8 @@ function highlightText(element, term) {
     });
 }
 
-function initMobileNav() {
-    if (window.innerWidth > 991) return;
-    
-    const existingNav = document.querySelector('.mobile-nav');
-    if (existingNav) return;
-    
-    const isLoggedIn = document.querySelector('.navbar');
-    if (!isLoggedIn) return;
-    
-    const mobileNav = document.createElement('nav');
-    mobileNav.className = 'mobile-nav';
-    mobileNav.innerHTML = `
-        <div class="mobile-nav-items">
-            <a href="/dashboard" class="mobile-nav-item ${isCurrentPath('/dashboard') ? 'active' : ''}">
-                <i class="bi bi-house-door"></i>
-                <span>Home</span>
-            </a>
-            <a href="/tasks" class="mobile-nav-item ${isCurrentPath('/tasks') ? 'active' : ''}">
-                <i class="bi bi-check2-square"></i>
-                <span>Tasks</span>
-            </a>
-            <a href="/bills" class="mobile-nav-item ${isCurrentPath('/bills') ? 'active' : ''}">
-                <i class="bi bi-receipt"></i>
-                <span>Bills</span>
-            </a>
-            <a href="/ai-assistant" class="mobile-nav-item ${isCurrentPath('/ai-assistant') ? 'active' : ''}">
-                <i class="bi bi-robot"></i>
-                <span>AI</span>
-            </a>
-            <a href="/profile" class="mobile-nav-item ${isCurrentPath('/profile') ? 'active' : ''}">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </div>
-    `;
-    
-    document.body.appendChild(mobileNav);
+function initMobileBottomNav() {
+    // Mobile bottom nav is now built into the footer template
 }
 
 function isCurrentPath(path) {
