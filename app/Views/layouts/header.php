@@ -42,12 +42,25 @@
                     
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-briefcase me-1"></i>Career
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="/jobs"><i class="bi bi-briefcase me-2"></i>Job Applications</a></li>
+                            <li><a class="dropdown-item" href="/resume"><i class="bi bi-file-person me-2"></i>CV Manager</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/goals"><i class="bi bi-bullseye me-2"></i>Goals</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-check2-square me-1"></i>Productivity
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="/tasks"><i class="bi bi-list-task me-2"></i>Tasks</a></li>
                             <li><a class="dropdown-item" href="/projects"><i class="bi bi-kanban me-2"></i>Projects</a></li>
                             <li><a class="dropdown-item" href="/time-tracking"><i class="bi bi-stopwatch me-2"></i>Time Tracking</a></li>
+                            <li><a class="dropdown-item" href="/habits"><i class="bi bi-check2-all me-2"></i>Habits</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/notes"><i class="bi bi-journal-text me-2"></i>Notes</a></li>
                             <li><a class="dropdown-item" href="/events"><i class="bi bi-calendar-event me-2"></i>Events</a></li>
@@ -62,11 +75,13 @@
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="/contacts"><i class="bi bi-people me-2"></i>Contacts</a></li>
                             <li><a class="dropdown-item" href="/relationships"><i class="bi bi-people-fill me-2"></i>Relationships</a></li>
+                            <li><a class="dropdown-item" href="/birthdays"><i class="bi bi-balloon me-2"></i>Birthdays</a></li>
                             <li><a class="dropdown-item" href="/pets"><i class="bi bi-heart me-2"></i>Pets</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/reading"><i class="bi bi-book me-2"></i>Reading List</a></li>
                             <li><a class="dropdown-item" href="/travel"><i class="bi bi-airplane me-2"></i>Travel</a></li>
                             <li><a class="dropdown-item" href="/vehicles"><i class="bi bi-car-front me-2"></i>Vehicles</a></li>
+                            <li><a class="dropdown-item" href="/social-links"><i class="bi bi-share me-2"></i>Social Links</a></li>
                         </ul>
                     </li>
                     

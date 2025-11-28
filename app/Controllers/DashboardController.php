@@ -9,6 +9,10 @@ use App\Models\Gamification;
 use App\Models\Notification;
 use App\Models\Budget;
 use App\Models\Subscription;
+use App\Models\JobApplication;
+use App\Models\Goal;
+use App\Models\Habit;
+use App\Models\Birthday;
 
 class DashboardController
 {
@@ -18,6 +22,10 @@ class DashboardController
     private $notificationModel;
     private $budgetModel;
     private $subscriptionModel;
+    private $jobModel;
+    private $goalModel;
+    private $habitModel;
+    private $birthdayModel;
 
     public function __construct()
     {
@@ -27,6 +35,10 @@ class DashboardController
         $this->notificationModel = new Notification();
         $this->budgetModel = new Budget();
         $this->subscriptionModel = new Subscription();
+        $this->jobModel = new JobApplication();
+        $this->goalModel = new Goal();
+        $this->habitModel = new Habit();
+        $this->birthdayModel = new Birthday();
     }
 
     public function index()
@@ -45,7 +57,14 @@ class DashboardController
             'unreadNotifications' => $this->notificationModel->getUnreadNotifications($userId) ?: [],
             'currentBudgets' => $this->budgetModel->getCurrentMonthBudgets($userId) ?: [],
             'activeSubscriptions' => $this->subscriptionModel->getActiveSubscriptions($userId) ?: [],
-            'monthlySubscriptionTotal' => $this->subscriptionModel->getMonthlyTotal($userId) ?: 0
+            'monthlySubscriptionTotal' => $this->subscriptionModel->getMonthlyTotal($userId) ?: 0,
+            'jobStats' => $this->jobModel->getStats($userId),
+            'activeGoals' => $this->goalModel->getActiveGoals($userId) ?: [],
+            'goalStats' => $this->goalModel->getStats($userId),
+            'habits' => $this->habitModel->findByUserId($userId) ?: [],
+            'habitStats' => $this->habitModel->getStats($userId),
+            'upcomingBirthdays' => $this->birthdayModel->getUpcoming($userId, 10) ?: [],
+            'todayBirthdays' => $this->birthdayModel->getTodayBirthdays($userId) ?: []
         ];
         
         require __DIR__ . '/../Views/dashboard/index.php';

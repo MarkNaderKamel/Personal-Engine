@@ -344,9 +344,199 @@ CREATE TABLE IF NOT EXISTS activity_logs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Career & Personal Management Modules
+
+-- Job Applications
+CREATE TABLE IF NOT EXISTS job_applications (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    company_name VARCHAR(255) NOT NULL,
+    job_title VARCHAR(255) NOT NULL,
+    job_description TEXT,
+    job_url VARCHAR(500),
+    salary_min DECIMAL(12, 2),
+    salary_max DECIMAL(12, 2),
+    location VARCHAR(255),
+    job_type VARCHAR(50),
+    status VARCHAR(50) DEFAULT 'applied',
+    priority VARCHAR(20) DEFAULT 'medium',
+    applied_date DATE,
+    interview_date TIMESTAMP,
+    contact_name VARCHAR(255),
+    contact_email VARCHAR(255),
+    contact_phone VARCHAR(50),
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CV/Resumes
+CREATE TABLE IF NOT EXISTS resumes (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    resume_name VARCHAR(255) NOT NULL,
+    summary TEXT,
+    file_path VARCHAR(500),
+    is_default BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resume_experiences (
+    id SERIAL PRIMARY KEY,
+    resume_id INTEGER REFERENCES resumes(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    company VARCHAR(255) NOT NULL,
+    position VARCHAR(255) NOT NULL,
+    start_date DATE,
+    end_date DATE,
+    is_current BOOLEAN DEFAULT FALSE,
+    description TEXT,
+    location VARCHAR(255),
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resume_education (
+    id SERIAL PRIMARY KEY,
+    resume_id INTEGER REFERENCES resumes(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    institution VARCHAR(255) NOT NULL,
+    degree VARCHAR(255),
+    field_of_study VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    gpa VARCHAR(20),
+    description TEXT,
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resume_skills (
+    id SERIAL PRIMARY KEY,
+    resume_id INTEGER REFERENCES resumes(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    skill_name VARCHAR(100) NOT NULL,
+    skill_level VARCHAR(50),
+    category VARCHAR(100),
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resume_certifications (
+    id SERIAL PRIMARY KEY,
+    resume_id INTEGER REFERENCES resumes(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    cert_name VARCHAR(255) NOT NULL,
+    issuing_org VARCHAR(255),
+    issue_date DATE,
+    expiry_date DATE,
+    credential_id VARCHAR(255),
+    credential_url VARCHAR(500),
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Goals
+CREATE TABLE IF NOT EXISTS goals (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    goal_title VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(100),
+    priority VARCHAR(20) DEFAULT 'medium',
+    status VARCHAR(50) DEFAULT 'in_progress',
+    progress INTEGER DEFAULT 0,
+    target_date DATE,
+    completed_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS goal_milestones (
+    id SERIAL PRIMARY KEY,
+    goal_id INTEGER REFERENCES goals(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    milestone_title VARCHAR(255) NOT NULL,
+    is_completed BOOLEAN DEFAULT FALSE,
+    completed_at TIMESTAMP,
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Habits
+CREATE TABLE IF NOT EXISTS habits (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    habit_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(100),
+    frequency VARCHAR(50) DEFAULT 'daily',
+    target_count INTEGER DEFAULT 1,
+    color VARCHAR(20) DEFAULT '#007bff',
+    is_active BOOLEAN DEFAULT TRUE,
+    current_streak INTEGER DEFAULT 0,
+    longest_streak INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS habit_logs (
+    id SERIAL PRIMARY KEY,
+    habit_id INTEGER REFERENCES habits(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    log_date DATE NOT NULL,
+    count INTEGER DEFAULT 1,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Birthdays
+CREATE TABLE IF NOT EXISTS birthdays (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    person_name VARCHAR(255) NOT NULL,
+    birth_date DATE NOT NULL,
+    relationship VARCHAR(100),
+    reminder_days INTEGER DEFAULT 7,
+    gift_ideas TEXT,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Social Links
+CREATE TABLE IF NOT EXISTS social_links (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    platform VARCHAR(100) NOT NULL,
+    url VARCHAR(500) NOT NULL,
+    username VARCHAR(255),
+    is_public BOOLEAN DEFAULT TRUE,
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Create indexes for performance
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_bills_user_id ON bills(user_id);
-CREATE INDEX idx_tasks_user_id ON tasks(user_id);
-CREATE INDEX idx_notifications_user_id ON notifications(user_id);
-CREATE INDEX idx_documents_user_id ON documents(user_id);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_bills_user_id ON bills(user_id);
+CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id);
+CREATE INDEX IF NOT EXISTS idx_notifications_user_id ON notifications(user_id);
+CREATE INDEX IF NOT EXISTS idx_documents_user_id ON documents(user_id);
+CREATE INDEX IF NOT EXISTS idx_job_applications_user_id ON job_applications(user_id);
+CREATE INDEX IF NOT EXISTS idx_job_applications_status ON job_applications(status);
+CREATE INDEX IF NOT EXISTS idx_resumes_user_id ON resumes(user_id);
+CREATE INDEX IF NOT EXISTS idx_resume_experiences_resume_id ON resume_experiences(resume_id);
+CREATE INDEX IF NOT EXISTS idx_resume_education_resume_id ON resume_education(resume_id);
+CREATE INDEX IF NOT EXISTS idx_resume_skills_resume_id ON resume_skills(resume_id);
+CREATE INDEX IF NOT EXISTS idx_resume_certifications_resume_id ON resume_certifications(resume_id);
+CREATE INDEX IF NOT EXISTS idx_goals_user_id ON goals(user_id);
+CREATE INDEX IF NOT EXISTS idx_goals_status ON goals(status);
+CREATE INDEX IF NOT EXISTS idx_goal_milestones_goal_id ON goal_milestones(goal_id);
+CREATE INDEX IF NOT EXISTS idx_habits_user_id ON habits(user_id);
+CREATE INDEX IF NOT EXISTS idx_habit_logs_habit_id ON habit_logs(habit_id);
+CREATE INDEX IF NOT EXISTS idx_habit_logs_date ON habit_logs(log_date);
+CREATE INDEX IF NOT EXISTS idx_birthdays_user_id ON birthdays(user_id);
+CREATE INDEX IF NOT EXISTS idx_birthdays_birth_date ON birthdays(birth_date);
+CREATE INDEX IF NOT EXISTS idx_social_links_user_id ON social_links(user_id);

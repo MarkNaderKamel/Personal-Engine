@@ -112,8 +112,9 @@ Schema is initialized in the database with all necessary tables and indexes.
 ## Navigation Structure
 The navbar is organized into dropdown categories:
 - **Financial**: Bills, Budgets, Subscriptions, Debts, Assets, Crypto Portfolio
-- **Productivity**: Tasks, Projects, Time Tracking, Notes, Events, Contracts
-- **Personal**: Contacts, Relationships, Pets, Reading List, Travel, Vehicles
+- **Career**: Job Applications, CV Manager, Goals
+- **Productivity**: Tasks, Projects, Time Tracking, Habits, Notes, Events, Contracts
+- **Personal**: Contacts, Relationships, Birthdays, Pets, Reading List, Travel, Vehicles, Social Links
 - **Tools**: AI Assistant, Passwords, Documents, Analytics
 
 ## Security Considerations
@@ -153,6 +154,16 @@ The navbar is organized into dropdown categories:
 - `REPL_OWNER`: For Replit-specific URLs
 
 ## Recent Changes
+
+### 2025-11-28: Phase 3 - Career & Personal Management Modules
+- **Job Application Tracker**: Complete CRUD for job applications with status tracking (applied, interviewing, offered, rejected, accepted), priority levels, interview scheduling, contact management, and statistics dashboard
+- **CV/Resume Manager**: Multi-resume support with work experience, education, skills (categorized), and certifications management. Default resume selection and file upload support
+- **Goals Module**: Goal tracking with categories, priorities, progress percentages, milestones, and target dates. Visual progress bars and status management
+- **Habits Tracker**: Daily habit tracking with frequency settings (daily, weekly, weekdays, weekends), categories, color coding, weekly progress, and completion logging
+- **Birthdays Manager**: Birthday tracking with relationship categories, reminder settings, gift ideas, and upcoming birthday alerts with days-until calculation
+- **Social Links**: Manage social media profiles with platform recognition, public/private visibility, and organized card display
+- **Enhanced Dashboard**: Added widgets for Jobs, Goals, Habits, and Birthdays with quick actions and progress tracking
+- **Updated Navigation**: Added "Career" dropdown with Job Applications, CV Manager, and Goals. Added Habits to Productivity, Birthdays and Social Links to Personal
 
 ### 2025-11-28: Phase 2 - Enhanced Features & UI
 - **Crypto Portfolio Management**: Full CRUD for crypto assets with portfolio value tracking

@@ -32,6 +32,12 @@ require __DIR__ . '/../app/Models/Vehicle.php';
 require __DIR__ . '/../app/Models/Password.php';
 require __DIR__ . '/../app/Models/TimeTracking.php';
 require __DIR__ . '/../app/Models/Relationship.php';
+require __DIR__ . '/../app/Models/JobApplication.php';
+require __DIR__ . '/../app/Models/Resume.php';
+require __DIR__ . '/../app/Models/Goal.php';
+require __DIR__ . '/../app/Models/Birthday.php';
+require __DIR__ . '/../app/Models/Habit.php';
+require __DIR__ . '/../app/Models/SocialLink.php';
 
 require __DIR__ . '/../app/Controllers/AuthController.php';
 require __DIR__ . '/../app/Controllers/DashboardController.php';
@@ -59,6 +65,12 @@ require __DIR__ . '/../app/Controllers/TimeTrackingController.php';
 require __DIR__ . '/../app/Controllers/CryptoController.php';
 require __DIR__ . '/../app/Controllers/RelationshipController.php';
 require __DIR__ . '/../app/Controllers/AnalyticsController.php';
+require __DIR__ . '/../app/Controllers/JobApplicationController.php';
+require __DIR__ . '/../app/Controllers/ResumeController.php';
+require __DIR__ . '/../app/Controllers/GoalController.php';
+require __DIR__ . '/../app/Controllers/BirthdayController.php';
+require __DIR__ . '/../app/Controllers/HabitController.php';
+require __DIR__ . '/../app/Controllers/SocialLinkController.php';
 
 use App\Core\Router;
 
@@ -254,6 +266,76 @@ $router->post('/relationships/delete/{id}', [$relationshipController, 'delete'])
 
 $analyticsController = new \App\Controllers\AnalyticsController();
 $router->get('/analytics', [$analyticsController, 'index']);
+
+$jobController = new \App\Controllers\JobApplicationController();
+$router->get('/jobs', [$jobController, 'index']);
+$router->get('/jobs/create', [$jobController, 'create']);
+$router->post('/jobs/create', [$jobController, 'create']);
+$router->get('/jobs/edit/{id}', [$jobController, 'edit']);
+$router->post('/jobs/edit/{id}', [$jobController, 'edit']);
+$router->get('/jobs/view/{id}', [$jobController, 'view']);
+$router->post('/jobs/status/{id}', [$jobController, 'updateStatus']);
+$router->post('/jobs/delete/{id}', [$jobController, 'delete']);
+
+$resumeController = new \App\Controllers\ResumeController();
+$router->get('/resume', [$resumeController, 'index']);
+$router->get('/resume/create', [$resumeController, 'createResume']);
+$router->post('/resume/create', [$resumeController, 'createResume']);
+$router->get('/resume/add-experience', [$resumeController, 'addExperience']);
+$router->post('/resume/add-experience', [$resumeController, 'addExperience']);
+$router->get('/resume/edit-experience/{id}', [$resumeController, 'editExperience']);
+$router->post('/resume/edit-experience/{id}', [$resumeController, 'editExperience']);
+$router->post('/resume/delete-experience/{id}', [$resumeController, 'deleteExperience']);
+$router->get('/resume/add-education', [$resumeController, 'addEducation']);
+$router->post('/resume/add-education', [$resumeController, 'addEducation']);
+$router->post('/resume/delete-education/{id}', [$resumeController, 'deleteEducation']);
+$router->get('/resume/add-skill', [$resumeController, 'addSkill']);
+$router->post('/resume/add-skill', [$resumeController, 'addSkill']);
+$router->post('/resume/delete-skill/{id}', [$resumeController, 'deleteSkill']);
+$router->get('/resume/add-certification', [$resumeController, 'addCertification']);
+$router->post('/resume/add-certification', [$resumeController, 'addCertification']);
+$router->post('/resume/delete-certification/{id}', [$resumeController, 'deleteCertification']);
+$router->post('/resume/delete-resume/{id}', [$resumeController, 'deleteResume']);
+$router->post('/resume/set-default/{id}', [$resumeController, 'setDefault']);
+
+$goalController = new \App\Controllers\GoalController();
+$router->get('/goals', [$goalController, 'index']);
+$router->get('/goals/create', [$goalController, 'create']);
+$router->post('/goals/create', [$goalController, 'create']);
+$router->get('/goals/edit/{id}', [$goalController, 'edit']);
+$router->post('/goals/edit/{id}', [$goalController, 'edit']);
+$router->get('/goals/view/{id}', [$goalController, 'view']);
+$router->post('/goals/progress/{id}', [$goalController, 'updateProgress']);
+$router->get('/goals/milestone/{id}', [$goalController, 'addMilestone']);
+$router->post('/goals/milestone/{id}', [$goalController, 'addMilestone']);
+$router->post('/goals/complete-milestone/{id}', [$goalController, 'completeMilestone']);
+$router->post('/goals/delete/{id}', [$goalController, 'delete']);
+
+$birthdayController = new \App\Controllers\BirthdayController();
+$router->get('/birthdays', [$birthdayController, 'index']);
+$router->get('/birthdays/create', [$birthdayController, 'create']);
+$router->post('/birthdays/create', [$birthdayController, 'create']);
+$router->get('/birthdays/edit/{id}', [$birthdayController, 'edit']);
+$router->post('/birthdays/edit/{id}', [$birthdayController, 'edit']);
+$router->post('/birthdays/delete/{id}', [$birthdayController, 'delete']);
+
+$habitController = new \App\Controllers\HabitController();
+$router->get('/habits', [$habitController, 'index']);
+$router->get('/habits/create', [$habitController, 'create']);
+$router->post('/habits/create', [$habitController, 'create']);
+$router->get('/habits/edit/{id}', [$habitController, 'edit']);
+$router->post('/habits/edit/{id}', [$habitController, 'edit']);
+$router->post('/habits/log/{id}', [$habitController, 'logHabit']);
+$router->post('/habits/toggle/{id}', [$habitController, 'toggle']);
+$router->post('/habits/delete/{id}', [$habitController, 'delete']);
+
+$socialController = new \App\Controllers\SocialLinkController();
+$router->get('/social-links', [$socialController, 'index']);
+$router->get('/social-links/create', [$socialController, 'create']);
+$router->post('/social-links/create', [$socialController, 'create']);
+$router->get('/social-links/edit/{id}', [$socialController, 'edit']);
+$router->post('/social-links/edit/{id}', [$socialController, 'edit']);
+$router->post('/social-links/delete/{id}', [$socialController, 'delete']);
 
 $router->notFound(function() {
     http_response_code(404);
