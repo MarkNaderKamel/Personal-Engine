@@ -68,6 +68,10 @@
                         <i class="bi bi-currency-bitcoin"></i>
                         <span>Crypto Portfolio</span>
                     </a>
+                    <a href="/forecast" class="sidebar-link <?= strpos($_SERVER['REQUEST_URI'], '/forecast') === 0 ? 'active' : '' ?>">
+                        <i class="bi bi-graph-up-arrow"></i>
+                        <span>Financial Forecaster</span>
+                    </a>
                 </div>
                 
                 <!-- Career Section -->
@@ -117,6 +121,27 @@
                     <a href="/contracts" class="sidebar-link <?= strpos($_SERVER['REQUEST_URI'], '/contracts') === 0 ? 'active' : '' ?>">
                         <i class="bi bi-file-earmark-text"></i>
                         <span>Contracts</span>
+                    </a>
+                </div>
+                
+                <!-- Life & Home -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Life & Home</div>
+                    <a href="/wellness" class="sidebar-link <?= strpos($_SERVER['REQUEST_URI'], '/wellness') === 0 ? 'active' : '' ?>">
+                        <i class="bi bi-heart-pulse"></i>
+                        <span>Wellness Tracker</span>
+                    </a>
+                    <a href="/pantry" class="sidebar-link <?= strpos($_SERVER['REQUEST_URI'], '/pantry') === 0 ? 'active' : '' ?>">
+                        <i class="bi bi-basket"></i>
+                        <span>Smart Pantry</span>
+                    </a>
+                    <a href="/recipes" class="sidebar-link <?= strpos($_SERVER['REQUEST_URI'], '/recipes') === 0 ? 'active' : '' ?>">
+                        <i class="bi bi-book"></i>
+                        <span>Recipes</span>
+                    </a>
+                    <a href="/inventory" class="sidebar-link <?= strpos($_SERVER['REQUEST_URI'], '/inventory') === 0 ? 'active' : '' ?>">
+                        <i class="bi bi-house-gear"></i>
+                        <span>Home Inventory</span>
                     </a>
                 </div>
                 

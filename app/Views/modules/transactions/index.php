@@ -17,6 +17,9 @@ $monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', '
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2><i class="bi bi-cash-stack me-2 text-success"></i>Transactions</h2>
         <div class="d-flex gap-2">
+            <a href="/transactions/export" class="btn btn-outline-success">
+                <i class="bi bi-download me-1"></i>Export CSV
+            </a>
             <a href="/transactions/report" class="btn btn-outline-info">
                 <i class="bi bi-graph-up me-1"></i>Reports
             </a>

@@ -44,12 +44,13 @@ Life Atlas is a comprehensive personal life management platform built with pure 
 
 ### Financial Management
 - **Bills**: Track one-time and recurring bills with alerts
-- **Transactions**: Income/expense tracking with categories
+- **Transactions**: Income/expense tracking with categories, CSV export
 - **Budgets**: Monthly budget planning by category
 - **Subscriptions**: Manage all subscriptions and track monthly costs
 - **Debts**: Loan and credit card tracking with interest rates and payment schedules
 - **Assets**: Property and investment tracking with valuation
 - **Crypto Portfolio**: Track cryptocurrency holdings with prices
+- **Financial Forecaster**: 12-month projections, goal calculator, spending insights
 
 ### Career
 - **Job Applications**: Full job search tracker with status workflow
@@ -64,6 +65,12 @@ Life Atlas is a comprehensive personal life management platform built with pure 
 - **Notes**: Rich text notes with favorites and tagging
 - **Events**: Calendar and event management with reminders
 - **Contracts**: Store and track contracts with expiry alerts
+
+### Life & Home (NEW)
+- **Wellness Tracker**: Track sleep, water intake, mood, energy, stress, exercise, steps, weight
+- **Smart Pantry**: Track food items with expiry dates, low stock alerts
+- **Recipes**: Recipe management with ingredients, cook tracking, pantry integration
+- **Home Inventory**: Track belongings with value, warranty tracking, insurance info
 
 ### Personal Life
 - **Contacts**: Store contact information with birthday reminders
@@ -134,9 +141,10 @@ Schema is initialized in the database with all necessary tables and indexes.
 The navigation is organized into collapsible sections in the left sidebar:
 
 - **Dashboard**: Main overview
-- **Financial**: Transactions, Bills, Budgets, Subscriptions, Debts, Assets, Crypto Portfolio
+- **Financial**: Transactions, Bills, Budgets, Subscriptions, Debts, Assets, Crypto Portfolio, Financial Forecaster
 - **Career**: Job Applications, CV Manager, Goals
 - **Productivity**: Tasks, Projects, Time Tracking, Habits, Notes, Events, Contracts
+- **Life & Home**: Wellness Tracker, Smart Pantry, Recipes, Home Inventory
 - **Personal**: Contacts, Relationships, Birthdays, Pets, Reading List, Travel, Vehicles, Social Links
 - **Tools**: AI Assistant, Passwords, Documents, Weather, News, Analytics
 - **Admin** (admin only): Dashboard, Users, Logs
@@ -178,6 +186,42 @@ The navigation is organized into collapsible sections in the left sidebar:
 - `REPL_OWNER`: For Replit-specific URLs
 
 ## Recent Changes
+
+### 2025-11-30: Phase 6 - Life & Home Modules
+- **Wellness Tracker**: Complete health tracking with charts and trends
+  - Track water intake, sleep hours, mood, energy, stress levels
+  - Exercise minutes and steps tracking
+  - Weight and calorie logging
+  - 30-day averages and streak tracking
+  - Interactive charts for trend analysis
+- **Smart Pantry**: Comprehensive pantry management
+  - Track items with quantities and units
+  - Expiry date alerts (expired and expiring soon)
+  - Low stock notifications
+  - Quick quantity adjustment
+  - Category-based organization
+- **Recipes**: Full recipe management system
+  - Recipe creation with ingredients and instructions
+  - Prep time, cook time, servings, difficulty levels
+  - Rating and favorite system
+  - "Cook" feature that deducts ingredients from pantry
+  - Times cooked tracking
+- **Home Inventory**: Belongings tracker
+  - Track items by room and category
+  - Purchase price and current value
+  - Warranty expiry tracking with alerts
+  - Insurance tracking
+  - Photo and receipt uploads
+  - CSV export functionality
+- **Financial Forecaster**: Advanced financial predictions
+  - 12-month balance projection
+  - Goal calculator (time to reach savings target)
+  - Income vs expense history charts
+  - Upcoming bills summary
+  - Monthly recurring cost breakdown
+  - Financial insights and recommendations
+- **CSV Export**: Added transaction export feature
+- **Database**: Created 8 new tables for new modules
 
 ### 2025-11-28: Phase 5 - Major Navigation Redesign
 - **Sidebar Navigation**: Moved all navigation from top header to collapsible left sidebar
@@ -247,4 +291,4 @@ The app will fail to load if database connection is not working. Check:
 5. **AI not working**: Verify OPENAI_API_KEY is set in secrets
 
 ## Last Updated
-November 28, 2025
+November 30, 2025

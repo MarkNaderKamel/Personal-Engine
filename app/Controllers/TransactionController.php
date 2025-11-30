@@ -152,4 +152,36 @@ class TransactionController
         
         require __DIR__ . '/../Views/modules/transactions/report.php';
     }
+
+    public function exportCsv()
+    {
+        Security::requireAuth();
+        
+        $startDate = $_GET['start'] ?? date('Y-01-01');
+        $endDate = $_GET['end'] ?? date('Y-m-d');
+        
+        $transactions = $this->model->getByDateRange($_SESSION['user_id'], $startDate, $endDate);
+        
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="transactions_' . date('Y-m-d') . '.csv"');
+        
+        $output = fopen('php://output', 'w');
+        
+        fputcsv($output, ['Date', 'Type', 'Category', 'Description', 'Amount', 'Payment Method', 'Notes']);
+        
+        foreach ($transactions as $t) {
+            fputcsv($output, [
+                $t['transaction_date'],
+                $t['transaction_type'],
+                $t['category'],
+                $t['description'],
+                $t['amount'],
+                $t['payment_method'],
+                $t['notes']
+            ]);
+        }
+        
+        fclose($output);
+        exit;
+    }
 }

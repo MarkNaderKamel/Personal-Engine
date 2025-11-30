@@ -540,3 +540,143 @@ CREATE INDEX IF NOT EXISTS idx_habit_logs_date ON habit_logs(log_date);
 CREATE INDEX IF NOT EXISTS idx_birthdays_user_id ON birthdays(user_id);
 CREATE INDEX IF NOT EXISTS idx_birthdays_birth_date ON birthdays(birth_date);
 CREATE INDEX IF NOT EXISTS idx_social_links_user_id ON social_links(user_id);
+
+-- Wellness Tracker Module
+CREATE TABLE IF NOT EXISTS wellness_logs (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    water_intake DECIMAL(5, 2) DEFAULT 0,
+    sleep_hours DECIMAL(4, 2) DEFAULT 0,
+    mood_score INTEGER CHECK (mood_score >= 1 AND mood_score <= 10),
+    energy_level INTEGER CHECK (energy_level >= 1 AND energy_level <= 10),
+    stress_level INTEGER CHECK (stress_level >= 1 AND stress_level <= 10),
+    exercise_minutes INTEGER DEFAULT 0,
+    steps_count INTEGER DEFAULT 0,
+    weight DECIMAL(5, 2),
+    calories_consumed INTEGER,
+    notes TEXT,
+    recorded_at DATE NOT NULL DEFAULT CURRENT_DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Home Inventory Module
+CREATE TABLE IF NOT EXISTS inventory_items (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    item_name VARCHAR(255) NOT NULL,
+    category VARCHAR(100),
+    location VARCHAR(255),
+    room VARCHAR(100),
+    serial_number VARCHAR(100),
+    model_number VARCHAR(100),
+    brand VARCHAR(100),
+    purchase_date DATE,
+    purchase_price DECIMAL(12, 2),
+    current_value DECIMAL(12, 2),
+    warranty_expiry DATE,
+    receipt_path VARCHAR(255),
+    photo_path VARCHAR(255),
+    condition VARCHAR(50) DEFAULT 'good',
+    notes TEXT,
+    is_insured BOOLEAN DEFAULT FALSE,
+    insurance_value DECIMAL(12, 2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Smart Pantry Module
+CREATE TABLE IF NOT EXISTS pantry_items (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    item_name VARCHAR(255) NOT NULL,
+    category VARCHAR(100),
+    quantity DECIMAL(10, 2) DEFAULT 1,
+    unit VARCHAR(50) DEFAULT 'piece',
+    expiry_date DATE,
+    purchase_date DATE,
+    purchase_price DECIMAL(10, 2),
+    location VARCHAR(100),
+    barcode VARCHAR(100),
+    minimum_stock DECIMAL(10, 2) DEFAULT 1,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Recipes Module
+CREATE TABLE IF NOT EXISTS recipes (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    recipe_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(100),
+    cuisine VARCHAR(100),
+    prep_time INTEGER,
+    cook_time INTEGER,
+    servings INTEGER DEFAULT 1,
+    difficulty VARCHAR(50) DEFAULT 'medium',
+    instructions TEXT,
+    image_path VARCHAR(255),
+    calories INTEGER,
+    is_favorite BOOLEAN DEFAULT FALSE,
+    times_cooked INTEGER DEFAULT 0,
+    last_cooked DATE,
+    source VARCHAR(255),
+    rating INTEGER CHECK (rating >= 1 AND rating <= 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Recipe Ingredients
+CREATE TABLE IF NOT EXISTS recipe_ingredients (
+    id SERIAL PRIMARY KEY,
+    recipe_id INTEGER REFERENCES recipes(id) ON DELETE CASCADE,
+    ingredient_name VARCHAR(255) NOT NULL,
+    quantity DECIMAL(10, 2),
+    unit VARCHAR(50),
+    is_optional BOOLEAN DEFAULT FALSE,
+    notes TEXT
+);
+
+-- Meal Plans
+CREATE TABLE IF NOT EXISTS meal_plans (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    recipe_id INTEGER REFERENCES recipes(id) ON DELETE SET NULL,
+    meal_date DATE NOT NULL,
+    meal_type VARCHAR(50),
+    servings INTEGER DEFAULT 1,
+    notes TEXT,
+    is_completed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Shopping Lists
+CREATE TABLE IF NOT EXISTS shopping_lists (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    list_name VARCHAR(255) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS shopping_list_items (
+    id SERIAL PRIMARY KEY,
+    list_id INTEGER REFERENCES shopping_lists(id) ON DELETE CASCADE,
+    item_name VARCHAR(255) NOT NULL,
+    quantity DECIMAL(10, 2) DEFAULT 1,
+    unit VARCHAR(50),
+    category VARCHAR(100),
+    is_purchased BOOLEAN DEFAULT FALSE,
+    estimated_price DECIMAL(10, 2),
+    actual_price DECIMAL(10, 2),
+    notes TEXT
+);
+
+-- Add indexes for new tables
+CREATE INDEX IF NOT EXISTS idx_wellness_user_date ON wellness_logs(user_id, recorded_at);
+CREATE INDEX IF NOT EXISTS idx_inventory_user ON inventory_items(user_id);
+CREATE INDEX IF NOT EXISTS idx_pantry_user ON pantry_items(user_id);
+CREATE INDEX IF NOT EXISTS idx_pantry_expiry ON pantry_items(expiry_date);
+CREATE INDEX IF NOT EXISTS idx_recipes_user ON recipes(user_id);
+CREATE INDEX IF NOT EXISTS idx_meal_plans_user_date ON meal_plans(user_id, meal_date);

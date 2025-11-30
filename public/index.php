@@ -39,6 +39,10 @@ require __DIR__ . '/../app/Models/Birthday.php';
 require __DIR__ . '/../app/Models/Habit.php';
 require __DIR__ . '/../app/Models/SocialLink.php';
 require __DIR__ . '/../app/Models/Transaction.php';
+require __DIR__ . '/../app/Models/WellnessLog.php';
+require __DIR__ . '/../app/Models/InventoryItem.php';
+require __DIR__ . '/../app/Models/PantryItem.php';
+require __DIR__ . '/../app/Models/Recipe.php';
 
 require __DIR__ . '/../app/Controllers/AuthController.php';
 require __DIR__ . '/../app/Controllers/DashboardController.php';
@@ -149,6 +153,7 @@ $router->get('/transactions/edit/{id}', [$transactionController, 'edit']);
 $router->post('/transactions/edit/{id}', [$transactionController, 'edit']);
 $router->post('/transactions/delete/{id}', [$transactionController, 'delete']);
 $router->get('/transactions/report', [$transactionController, 'report']);
+$router->get('/transactions/export', [$transactionController, 'exportCsv']);
 
 $subscriptionController = new \App\Controllers\SubscriptionController();
 $router->get('/subscriptions', [$subscriptionController, 'index']);
@@ -367,6 +372,58 @@ $router->get('/weather', [$weatherController, 'index']);
 
 $newsController = new \App\Controllers\NewsController();
 $router->get('/news', [$newsController, 'index']);
+
+require __DIR__ . '/../app/Controllers/WellnessController.php';
+require __DIR__ . '/../app/Controllers/InventoryController.php';
+require __DIR__ . '/../app/Controllers/PantryController.php';
+require __DIR__ . '/../app/Controllers/RecipeController.php';
+
+$wellnessController = new \App\Controllers\WellnessController();
+$router->get('/wellness', [$wellnessController, 'index']);
+$router->get('/wellness/log', [$wellnessController, 'log']);
+$router->post('/wellness/log', [$wellnessController, 'log']);
+$router->get('/wellness/history', [$wellnessController, 'history']);
+$router->get('/api/wellness/chart', [$wellnessController, 'getChartData']);
+$router->post('/wellness/delete/{id}', [$wellnessController, 'delete']);
+
+$inventoryController = new \App\Controllers\InventoryController();
+$router->get('/inventory', [$inventoryController, 'index']);
+$router->get('/inventory/create', [$inventoryController, 'create']);
+$router->post('/inventory/create', [$inventoryController, 'create']);
+$router->get('/inventory/edit/{id}', [$inventoryController, 'edit']);
+$router->post('/inventory/edit/{id}', [$inventoryController, 'edit']);
+$router->get('/inventory/view/{id}', [$inventoryController, 'view']);
+$router->post('/inventory/delete/{id}', [$inventoryController, 'delete']);
+$router->get('/inventory/search', [$inventoryController, 'search']);
+$router->get('/inventory/export', [$inventoryController, 'exportCsv']);
+
+$pantryController = new \App\Controllers\PantryController();
+$router->get('/pantry', [$pantryController, 'index']);
+$router->get('/pantry/create', [$pantryController, 'create']);
+$router->post('/pantry/create', [$pantryController, 'create']);
+$router->get('/pantry/edit/{id}', [$pantryController, 'edit']);
+$router->post('/pantry/edit/{id}', [$pantryController, 'edit']);
+$router->post('/pantry/delete/{id}', [$pantryController, 'delete']);
+$router->post('/pantry/adjust/{id}', [$pantryController, 'adjustQuantity']);
+$router->get('/pantry/search', [$pantryController, 'search']);
+
+$recipeController = new \App\Controllers\RecipeController();
+$router->get('/recipes', [$recipeController, 'index']);
+$router->get('/recipes/create', [$recipeController, 'create']);
+$router->post('/recipes/create', [$recipeController, 'create']);
+$router->get('/recipes/{id}', [$recipeController, 'view']);
+$router->get('/recipes/edit/{id}', [$recipeController, 'edit']);
+$router->post('/recipes/edit/{id}', [$recipeController, 'edit']);
+$router->post('/recipes/delete/{id}', [$recipeController, 'delete']);
+$router->post('/recipes/favorite/{id}', [$recipeController, 'toggleFavorite']);
+$router->post('/recipes/cook/{id}', [$recipeController, 'cook']);
+
+require __DIR__ . '/../app/Controllers/ForecastController.php';
+
+$forecastController = new \App\Controllers\ForecastController();
+$router->get('/forecast', [$forecastController, 'index']);
+$router->get('/forecast/scenarios', [$forecastController, 'getScenarios']);
+$router->get('/forecast/goal', [$forecastController, 'goalProjection']);
 
 $router->notFound(function() {
     http_response_code(404);
