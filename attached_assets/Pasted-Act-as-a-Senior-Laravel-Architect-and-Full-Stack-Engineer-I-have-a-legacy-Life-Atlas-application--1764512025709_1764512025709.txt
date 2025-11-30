@@ -1,0 +1,49 @@
+Act as a Senior Laravel Architect and Full-Stack Engineer. I have a legacy "Life Atlas" application built in pure PHP (MVC) with PostgreSQL.
+
+I need you to completely rebuild this application using **Laravel 11** and **MySQL**. The goal is to modernize the architecture, add specific new features, and ensure the final build is ready for deployment on **Hostinger Shared Hosting**.
+
+Please execute this transition plan in **4 Distinct Phases**. Do not generate all code at once; wait for my confirmation after each phase.
+
+### Context
+- **Current Stack:** Pure PHP, Custom Router, PostgreSQL, Bootstrap 5.
+- **Target Stack:** Laravel 11, MySQL, Blade Templates, Bootstrap 5 (maintained for UI consistency).
+- **Hosting:** Hostinger (Apache/MySQL environment).
+
+---
+
+### Phase 1: Foundation & Database Migration
+1.  **Laravel Setup:** Initialize a standard Laravel directory structure.
+2.  **Database Configuration:** Configure `.env` for MySQL.
+3.  **Migrations:** Analyze the provided `database/schema.sql`. Convert ALL tables (`users`, `bills`, `tasks`, `transactions`, etc.) into Laravel Migration files.
+    * *Crucial:* Ensure data types are compatible with MySQL (e.g., use `decimal` for money, `text` for long notes).
+4.  **Models:** Create Eloquent Models for all tables. Define relationships (e.g., `User hasMany Tasks`, `Project hasMany Tasks`).
+
+### Phase 2: Core Logic & Authentication Port
+1.  **Authentication:** Implement Laravel Auth (standard `Breeze` or manual `Auth` facade) to replace the custom `AuthController`.
+2.  **Controller Porting:** Convert the following raw PHP controllers to Laravel Controllers, replacing raw SQL queries with **Eloquent ORM**:
+    * `DashboardController` (Aggregating stats)
+    * `TransactionController` (Finance)
+    * `TaskController` (Productivity)
+3.  **Routes:** Define `routes/web.php` grouping routes by middleware `auth`.
+
+### Phase 3: New Features & Module Expansion
+Implement these **NEW** modules that do not exist in the old codebase:
+1.  **Wellness Tracker Module:**
+    * **Migration:** `wellness_logs` (user_id, water_intake, sleep_hours, mood_score, recorded_at).
+    * **UI:** A chart-based dashboard showing health trends over the last 30 days.
+2.  **Kanban Board Feature:**
+    * **Upgrade:** Enhance the `Projects` view. Instead of a list of tasks, render a Drag-and-Drop Kanban board with columns: "To Do", "In Progress", "Done".
+    * **Logic:** Add an AJAX endpoint to update task status on drag.
+3.  **Home Inventory Module:**
+    * **Migration:** `inventory_items` (user_id, name, location, serial_number, purchase_date, warranty_expiry, photo_path).
+    * **Feature:** Allow photo uploads for insurance purposes.
+
+### Phase 4: Views, Exporting & Deployment
+1.  **Blade Conversion:** Convert the existing PHP views (`app/Views/*`) to Blade templates (`resources/views/*`).
+    * Create a master layout: `layouts/app.blade.php` (Sidebar + Header).
+2.  **Data Export:** In the `TransactionController`, add a method `exportCsv()` that forces a download of the user's financial history.
+3.  **Hostinger Deployment Prep:**
+    * Create a specific `.htaccess` file for the root directory to forward requests to the `public/` folder (standard fix for shared hosting).
+    * Provide a `deploy_guide.md` with instructions for setting up the MySQL database and running migrations on a shared host.
+
+**Please start by generating the output for Phase 1: Database Migrations and Eloquent Models.**

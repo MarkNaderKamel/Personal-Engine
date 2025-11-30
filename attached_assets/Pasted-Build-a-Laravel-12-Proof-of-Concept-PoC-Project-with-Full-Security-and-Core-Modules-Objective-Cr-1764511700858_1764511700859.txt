@@ -1,0 +1,94 @@
+Build a Laravel 12 Proof-of-Concept (PoC) Project with Full Security and Core Modules
+
+Objective:
+Create a fully functional Laravel 12 project as a Proof-of-Concept that includes secure authentication, file management, database migrations, RBAC, and security hardening, ready to run on Hostinger VPS or any standard server. The PoC should follow modern Laravel best practices, security standards, and modular architecture.
+
+Requirements & Features:
+
+Laravel Setup
+
+Use Laravel 12 or latest stable version.
+
+Include Redis for caching and queues.
+
+Set up Composer packages: laravel/sanctum, spatie/laravel-permission, league/flysystem-aws-s3-v3 (or S3-compatible driver).
+
+Provide .env.example with secure placeholders (APP_KEY, DB credentials, S3 keys).
+
+Authentication & Users
+
+Implement Laravel Sanctum for API token authentication.
+
+Include 2FA (TOTP) and WebAuthn / Passkeys for critical users.
+
+Implement RBAC using spatie/laravel-permission with roles and permissions.
+
+Provide a sessions view showing active devices for each user.
+
+Admins should have forced password rotation option.
+
+File Upload / Document Management
+
+Implement file upload functionality with storage in S3 or secure path outside webroot.
+
+Generate signed URLs for temporary downloads.
+
+Optional: Integrate basic virus scan pipeline (ClamAV or equivalent).
+
+Implement file encryption at rest for sensitive files.
+
+Database Migrations & Seeders
+
+Create migrations for: users, roles, permissions, files.
+
+Seeders to generate sample users, roles, and sample files.
+
+Ensure database schema follows Laravel best practices.
+
+Security Hardening
+
+APP_DEBUG=false in production environment.
+
+Enable CSRF protection and XSS protection (Blade escaping).
+
+Log critical events (login attempts, file uploads/downloads, password changes).
+
+Optional: integrate Sentry for centralized logging.
+
+Provide secure default Nginx configuration examples and recommended .env settings.
+
+Project Structure & Documentation
+
+Modular structure: each module (Auth, Files, Users) as separate Laravel packages/modules.
+
+README with detailed instructions for:
+
+Installation
+
+Running migrations & seeders
+
+Starting Laravel server
+
+Setting up Redis & S3
+
+Configuring 2FA & WebAuthn
+
+Include clear instructions for Hostinger VPS deployment.
+
+Deliverables
+
+Complete Laravel 12 project with working PoC features above.
+
+.env.example and recommended security configs.
+
+Sample data via seeders.
+
+Modular architecture ready for future expansion (Tasks, Financials, AI Assistant, Gamification).
+
+Extra Notes
+
+Follow OWASP 2025 guidelines for web application security.
+
+Use Laravel best practices for routes, controllers, Eloquent models, and service providers.
+
+The goal is a secure, functional foundation that can later scale to full system migration.

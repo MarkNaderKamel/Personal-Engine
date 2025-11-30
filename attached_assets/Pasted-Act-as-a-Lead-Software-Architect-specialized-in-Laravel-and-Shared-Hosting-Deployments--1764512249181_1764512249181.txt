@@ -1,0 +1,47 @@
+Act as a **Lead Software Architect** specialized in **Laravel** and **Shared Hosting Deployments**.
+
+I need to convert my legacy "Life Atlas" project (Pure PHP/PostgreSQL) into a modern **Laravel 11 Application** using **MySQL**. The final product must be ready for deployment on **Hostinger Shared Hosting**.
+
+You must also expand the system with advanced new modules.
+
+### 🛠️ Technical Stack Specifications
+* **Framework:** Laravel 11.x
+* **Database:** MySQL 8.0 (Migrate schema from PostgreSQL).
+* **Frontend:** Blade Templates + Bootstrap 5 (Keep existing UI style) + **Livewire** (for dynamic components like Kanban/Calendar).
+* **Environment:** Apache Shared Hosting (Must handle `public_html` routing).
+
+### 📋 Execution Plan (4 Phases)
+Please execute this plan sequentially. **Do not output all code at once.** Start with Phase 1, and wait for me to say "Proceed to Phase 2".
+
+#### Phase 1: Architecture & Data Migration
+1.  **Laravel Init:** Set up the standard folder structure.
+2.  **Database Migration:** Convert the legacy `database/schema.sql` into **Laravel Migrations**.
+    * *Crucial:* Change `RETURNING id` (Postgres) logic to standard Eloquent `create()`.
+    * *Crucial:* Ensure proper foreign key constraints are defined in migrations.
+3.  **Models:** Generate Eloquent Models for: `User`, `Bill`, `Transaction`, `Task`, `Project`, `Asset`, `Crypto`, `Contact`, `Habit`.
+    * Define all relationships (e.g., `User` hasMany `Transactions`).
+
+#### Phase 2: Core Modules & Authentication
+1.  **Auth Scaffolding:** Install **Laravel Breeze** (Blade version) for robust login/register/password reset.
+2.  **Controller Refactor:** Rewrite `TransactionController` and `TaskController` using Eloquent.
+3.  **Logic Port:** Move the "Gamification" logic (XP calculation) into a dedicated **Service Class** (`App\Services\GamificationService`) so it can be called from any controller.
+
+#### Phase 3: Advanced New Features (The Upgrade)
+Implement these **NEW** modules using **Livewire** for interactivity:
+1.  **Productivity Hub (Kanban):** A drag-and-drop board for Project Tasks.
+2.  **Smart Pantry & Recipes:**
+    * Migration: `pantry_items`, `recipes`, `recipe_ingredients`.
+    * Feature: Button to "Cook" a recipe, which deducts items from `pantry_items`.
+3.  **Financial Forecaster:**
+    * Logic: A service that projects the user's balance for the next 6 months based on `bills` (recurring) and average `transactions`.
+    * View: A Line Chart (using Chart.js) showing the projected balance.
+
+#### Phase 4: Hostinger Deployment Prep
+1.  **Shared Hosting Config:**
+    * Create an `.htaccess` file for the **root** directory (not `public/`) that correctly forwards traffic to the `public` folder, as Hostinger requires this for security.
+2.  **AppServiceProvider:** Ensure `Schema::defaultStringLength(191);` is set (common MySQL fix).
+3.  **Optimization:** Add a route to cache configuration commands compatible with shared hosting terminals.
+
+---
+
+**Request:** Please start by generating the **Phase 1** output: The **Laravel Migrations** for the core tables (`users`, `bills`, `transactions`, `tasks`) ensuring MySQL compatibility.
