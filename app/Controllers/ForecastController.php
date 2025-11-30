@@ -81,10 +81,10 @@ class ForecastController
     private function getUpcomingBills($userId)
     {
         $stmt = $this->db->prepare("
-            SELECT name, amount, due_date, is_recurring
+            SELECT bill_name, amount, due_date, is_recurring
             FROM bills
             WHERE user_id = ? 
-            AND is_paid = false
+            AND status != 'paid'
             AND due_date >= CURRENT_DATE
             AND due_date <= CURRENT_DATE + INTERVAL '30 days'
             ORDER BY due_date ASC

@@ -120,7 +120,7 @@
                                     <?php foreach ($upcomingBills as $bill): ?>
                                         <tr>
                                             <td>
-                                                <?= htmlspecialchars($bill['name']) ?>
+                                                <?= htmlspecialchars($bill['bill_name']) ?>
                                                 <?php if ($bill['is_recurring']): ?>
                                                     <i class="bi bi-arrow-repeat text-muted ms-1" title="Recurring"></i>
                                                 <?php endif; ?>

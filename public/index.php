@@ -178,6 +178,8 @@ $router->get('/projects', [$projectController, 'index']);
 $router->get('/projects/create', [$projectController, 'create']);
 $router->post('/projects/create', [$projectController, 'create']);
 $router->get('/projects/view/{id}', [$projectController, 'view']);
+$router->get('/projects/board/{id}', [$projectController, 'board']);
+$router->post('/projects/task/status/{id}', [$projectController, 'updateTaskStatus']);
 $router->post('/projects/delete/{id}', [$projectController, 'delete']);
 
 $adminController = new \App\Controllers\AdminController();

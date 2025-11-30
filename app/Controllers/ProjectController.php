@@ -75,6 +75,62 @@ class ProjectController
         require __DIR__ . '/../Views/modules/projects/view.php';
     }
 
+    public function board($id)
+    {
+        Security::requireAuth();
+        $project = $this->projectModel->findById($id);
+        
+        if (!$project || $project['user_id'] != $_SESSION['user_id']) {
+            http_response_code(404);
+            die('Project not found');
+        }
+
+        $tasksByStatus = $this->taskModel->getTasksByProjectGrouped($id);
+        $taskStats = $this->taskModel->getProjectTaskStats($id);
+        require __DIR__ . '/../Views/modules/projects/board.php';
+    }
+
+    public function updateTaskStatus($taskId)
+    {
+        Security::requireAuth();
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /projects');
+            exit;
+        }
+
+        $status = $_POST['status'] ?? 'pending';
+        $validStatuses = ['pending', 'in_progress', 'review', 'completed'];
+        
+        if (!in_array($status, $validStatuses)) {
+            $status = 'pending';
+        }
+
+        if ($this->taskModel->updateStatus($taskId, $status, $_SESSION['user_id'])) {
+            if ($status === 'completed') {
+                $this->gamification->addXP($_SESSION['user_id'], 15, 'task_completed', 'Completed a project task');
+            }
+            
+            if ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '' === 'XMLHttpRequest') {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true]);
+                exit;
+            }
+            $_SESSION['success'] = 'Task status updated';
+        } else {
+            if ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '' === 'XMLHttpRequest') {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'error' => 'Failed to update task']);
+                exit;
+            }
+            $_SESSION['error'] = 'Failed to update task status';
+        }
+
+        $referer = $_SERVER['HTTP_REFERER'] ?? '/projects';
+        header('Location: ' . $referer);
+        exit;
+    }
+
     public function delete($id)
     {
         Security::requireAuth();
