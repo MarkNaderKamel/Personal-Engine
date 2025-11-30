@@ -1995,3 +1995,237 @@ h1, h2, h3, h4, h5, h6 {
     0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
     100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
 }
+
+/* Enhanced Page Animations */
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideOutDown {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(30px); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+}
+
+.animate-slideInUp {
+    animation: slideInUp 0.4s ease-out forwards;
+}
+
+.animate-slideInLeft {
+    animation: slideInLeft 0.4s ease-out forwards;
+}
+
+.animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Staggered Animation Delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Wellness Tracker Styles */
+.wellness-metric {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background: var(--bg-light);
+    transition: var(--transition-base);
+}
+
+.wellness-metric:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    background: white;
+}
+
+.wellness-metric i {
+    transition: var(--transition-base);
+}
+
+.wellness-metric:hover i {
+    transform: scale(1.2);
+}
+
+/* Recipe Card Styles */
+.recipe-item {
+    transition: var(--transition-base);
+}
+
+.recipe-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.recipe-item .card-img-top {
+    transition: var(--transition-base);
+}
+
+.recipe-item:hover .card-img-top {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.recent-recipe-card {
+    transition: var(--transition-base);
+}
+
+.recent-recipe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    background: white !important;
+}
+
+/* Pantry & Inventory Improvements */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Kanban Board Improvements */
+.kanban-task {
+    transition: all 0.2s ease;
+}
+
+.kanban-task.dragging {
+    opacity: 0.6;
+    transform: rotate(3deg) scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.kanban-column.drag-over {
+    background: rgba(102, 126, 234, 0.05);
+}
+
+/* Toast Notifications */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    background: white;
+    box-shadow: var(--shadow-xl);
+    z-index: 9999;
+    animation: slideInUp 0.3s ease-out;
+}
+
+.toast-notification.success {
+    border-left: 4px solid var(--success);
+}
+
+.toast-notification.error {
+    border-left: 4px solid var(--danger);
+}
+
+.toast-notification.info {
+    border-left: 4px solid var(--info);
+}
+
+/* Content Wrapper Animation */
+.content-wrapper {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Data Table Enhancements */
+.table tbody tr {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.table tbody tr:nth-child(2) { animation-delay: 0.08s; }
+.table tbody tr:nth-child(3) { animation-delay: 0.11s; }
+.table tbody tr:nth-child(4) { animation-delay: 0.14s; }
+.table tbody tr:nth-child(5) { animation-delay: 0.17s; }
+
+/* Loading Shimmer Effect */
+.shimmer-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* XP Bar Animation */
+.xp-bar {
+    position: relative;
+    overflow: hidden;
+}
+
+.xp-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+/* Achievement Unlock Animation */
+@keyframes achievementUnlock {
+    0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+    50% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.achievement-new {
+    animation: achievementUnlock 0.5s ease-out;
+}
+
+/* Stat Number Counter Effect */
+.stat-number-animate {
+    transition: all 0.5s ease-out;
+}
+
+/* Mobile Improvements */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 0.5rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .stat-card .card-body {
+        padding: 1rem;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.5rem;
+    }
+}
