@@ -1,0 +1,14 @@
+Fatal error: Uncaught Error: Call to undefined method App\Core\Database::prepare() in /home/runner/workspace/app/Controllers/ForecastController.php:38 Stack trace: #0 /home/runner/workspace/app/Controllers/ForecastController.php(22): App\Controllers\ForecastController->getCurrentBalance(1) #1 [internal function]: App\Controllers\ForecastController->index() #2 /home/runner/workspace/app/Core/Router.php(44): call_user_func_array(Array, Array) #3 /home/runner/workspace/public/index.php(433): App\Core\Router->run() #4 {main} thrown in /home/runner/workspace/app/Controllers/ForecastController.php on line 38
+
+
+Fatal error: Uncaught Error: Call to undefined method App\Core\Database::prepare() in /home/runner/workspace/app/Models/WellnessLog.php:34 Stack trace: #0 /home/runner/workspace/app/Controllers/WellnessController.php(25): App\Models\WellnessLog->getLastNDays(1, 30) #1 [internal function]: App\Controllers\WellnessController->index() #2 /home/runner/workspace/app/Core/Router.php(44): call_user_func_array(Array, Array) #3 /home/runner/workspace/public/index.php(433): App\Core\Router->run() #4 {main} thrown in /home/runner/workspace/app/Models/WellnessLog.php on line 34
+
+
+Fatal error: Uncaught Error: Call to undefined method App\Core\Database::prepare() in /home/runner/workspace/app/Models/PantryItem.php:17 Stack trace: #0 /home/runner/workspace/app/Controllers/PantryController.php(28): App\Models\PantryItem->findByUserId(1) #1 [internal function]: App\Controllers\PantryController->index() #2 /home/runner/workspace/app/Core/Router.php(44): call_user_func_array(Array, Array) #3 /home/runner/workspace/public/index.php(433): App\Core\Router->run() #4 {main} thrown in /home/runner/workspace/app/Models/PantryItem.php on line 17
+
+Fatal error: Uncaught Error: Call to undefined method App\Core\Database::prepare() in /home/runner/workspace/app/Models/Recipe.php:21 Stack trace: #0 /home/runner/workspace/app/Controllers/RecipeController.php(28): App\Models\Recipe->findByUserId(1) #1 [internal function]: App\Controllers\RecipeController->index() #2 /home/runner/workspace/app/Core/Router.php(44): call_user_func_array(Array, Array) #3 /home/runner/workspace/public/index.php(433): App\Core\Router->run() #4 {main} thrown in /home/runner/workspace/app/Models/Recipe.php on line 21
+
+
+Fatal error: Uncaught Error: Call to undefined method App\Core\Database::prepare() in /home/runner/workspace/app/Models/InventoryItem.php:17 Stack trace: #0 /home/runner/workspace/app/Controllers/InventoryController.php(25): App\Models\InventoryItem->findByUserId(1) #1 [internal function]: App\Controllers\InventoryController->index() #2 /home/runner/workspace/app/Core/Router.php(44): call_user_func_array(Array, Array) #3 /home/runner/workspace/public/index.php(433): App\Core\Router->run() #4 {main} thrown in /home/runner/workspace/app/Models/InventoryItem.php on line 17
+
+
