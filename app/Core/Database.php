@@ -123,4 +123,14 @@ class Database
     {
         return $this->connection->rollback();
     }
+
+    public function prepare($sql)
+    {
+        return $this->connection->prepare($sql);
+    }
+
+    public function lastInsertId()
+    {
+        return $this->connection->lastInsertId();
+    }
 }
